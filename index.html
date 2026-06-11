@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal das VIPs · Le Moritz</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --p1: #5B3765; --p2: #9E6899; --p3: #BA88AE; --p4: #D6A8C4; --p5: #F3CCDE;
+  --bg: #f5eaf4; --white: #fff; --text: #2a1030; --muted: rgba(42,16,48,.48);
+  --glass: rgba(255,255,255,0.42); --glass-b: rgba(255,255,255,0.75);
+  --glass-s: 0 6px 32px rgba(91,55,101,.10), inset 0 1.5px 0 rgba(255,255,255,0.88);
+  --glass-sh: 0 16px 50px rgba(91,55,101,.18), inset 0 1.5px 0 rgba(255,255,255,0.92);
+  --dark-g: rgba(42,8,55,0.70); --dark-gb: rgba(255,255,255,.12);
+}
+body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); overflow-x:hidden; min-height:100vh; }
+.bg-canvas { position:fixed; inset:0; z-index:0; overflow:hidden; }
+.bg-canvas::before {
+  content:''; position:absolute; inset:-30%;
+  background:
+    radial-gradient(ellipse 700px 650px at 85% 5%,  rgba(214,168,196,.8) 0%, transparent 55%),
+    radial-gradient(ellipse 550px 500px at 5%  80%, rgba(91,55,101,.6)   0%, transparent 55%),
+    radial-gradient(ellipse 450px 420px at 50% 50%, rgba(243,204,222,.85) 0%, transparent 50%),
+    radial-gradient(ellipse 350px 300px at 25% 15%, rgba(158,104,153,.45) 0%, transparent 50%),
+    radial-gradient(ellipse 280px 280px at 75% 85%, rgba(186,136,174,.5)  0%, transparent 50%);
+  animation: bgflow 22s ease-in-out infinite;
+}
+@keyframes bgflow {
+  0%,100%{transform:translate(0,0) rotate(0deg) scale(1)}
+  25%{transform:translate(25px,-18px) rotate(2deg) scale(1.02)}
+  50%{transform:translate(-15px,28px) rotate(-1.5deg) scale(.98)}
+  75%{transform:translate(18px,10px) rotate(1deg) scale(1.01)}
+}
+.topbar { position:sticky; top:0; z-index:200; background:rgba(245,234,244,.6); backdrop-filter:blur(30px); -webkit-backdrop-filter:blur(30px); border-bottom:1px solid rgba(255,255,255,.65); box-shadow:0 2px 20px rgba(91,55,101,.09); }
+.tb-inner { max-width:1100px; margin:0 auto; padding:0 28px; display:flex; align-items:center; gap:16px; height:60px; }
+.logo-wrap { display:flex; align-items:center; gap:0; flex-direction:column; justify-content:center; line-height:1; margin-right:8px; }
+.logo-main { font-family:'Playfair Display',Georgia,serif; font-size:16px; font-weight:700; color:var(--p1); letter-spacing:.12em; text-transform:uppercase; }
+.logo-sub  { font-size:7.5px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--p2); margin-top:1px; }
+.nav { display:flex; gap:2px; margin-left:auto; }
+.nb { padding:7px 15px; border-radius:100px; border:1.5px solid transparent; background:transparent; color:var(--muted); font-size:13px; font-weight:500; cursor:pointer; transition:all .18s; font-family:inherit; }
+.nb:hover { background:rgba(255,255,255,.55); color:var(--p1); border-color:rgba(255,255,255,.8); }
+.nb.on { background:var(--p1); color:white; border-color:var(--p1); box-shadow:0 4px 16px rgba(91,55,101,.32); }
+.tab { display:none; position:relative; z-index:1; }
+.tab.on { display:block; }
+.wrap { max-width:1100px; margin:0 auto; padding:48px 28px; }
+.g  { background:var(--glass); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border:1px solid var(--glass-b); box-shadow:var(--glass-s); }
+.gd { background:var(--dark-g); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border:1px solid var(--dark-gb); box-shadow:0 6px 32px rgba(0,0,0,.22), inset 0 1.5px 0 rgba(255,255,255,.14); }
+.gp { background:rgba(91,55,101,.18); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border:1px solid rgba(214,168,196,.5); box-shadow:var(--glass-s); }
+
+/* HOME */
+.home-hero { margin-bottom:44px; }
+.hero-split { display:grid; grid-template-columns:1fr 330px; gap:18px; min-height:260px; }
+.hero-photo { border-radius:26px; overflow:hidden; position:relative; background:var(--p1); }
+.hero-photo img { width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block; filter:brightness(.82); }
+.hero-overlay { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:34px 36px; background:linear-gradient(to top, rgba(42,8,55,.72) 0%, rgba(42,8,55,.15) 55%, transparent 100%); }
+.hero-pill { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.25); color:rgba(255,255,255,.9); font-size:11px; font-weight:600; letter-spacing:.04em; padding:5px 12px; border-radius:100px; margin-bottom:12px; width:fit-content; }
+.hero-pill::before { content:'●'; font-size:6px; color:#b8f0b8; }
+.hero-title { font-family:'Playfair Display',Georgia,serif; font-size:38px; line-height:1.15; color:white; font-weight:700; }
+.hero-title em { font-style:italic; }
+.hero-sub { font-size:14px; color:rgba(255,255,255,.65); margin-top:8px; line-height:1.6; }
+.hero-right { display:flex; flex-direction:column; gap:14px; }
+.hcard { flex:1; border-radius:22px; padding:20px 20px; display:flex; flex-direction:column; gap:5px; }
+.hcard-lbl { font-size:10px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; }
+.hcard.dk .hcard-lbl { color:rgba(255,255,255,.45); }
+.hcard.lt .hcard-lbl { color:var(--muted); }
+.hcard-val { font-size:21px; font-weight:800; letter-spacing:-.02em; }
+.hcard.dk .hcard-val { color:white; }
+.hcard.lt .hcard-val { color:var(--p1); }
+.hcard-sub { font-size:12px; }
+.hcard.dk .hcard-sub { color:rgba(255,255,255,.4); }
+.hcard.lt .hcard-sub { color:var(--muted); }
+.sec-lbl { font-size:12px; font-weight:600; color:var(--muted); margin-bottom:16px; }
+
+/* MURAL */
+.mural-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:44px; }
+.mcard { border-radius:20px; padding:22px 20px; }
+.mc1 { background:rgba(214,168,196,.38); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,.6); box-shadow:var(--glass-s); }
+.mc2 { background:rgba(158,104,153,.2);  backdrop-filter:blur(20px); border:1px solid rgba(214,168,196,.5); box-shadow:var(--glass-s); }
+.mcard-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:.06em; padding:4px 10px; border-radius:100px; margin-bottom:10px; background:rgba(91,55,101,.14); color:var(--p1); }
+.mcard h3 { font-size:15px; font-weight:700; margin-bottom:6px; line-height:1.3; }
+.mcard p  { font-size:13px; color:var(--muted); line-height:1.6; }
+.mcard-date { font-size:11px; color:var(--muted); opacity:.55; margin-top:10px; display:block; }
+
+/* OFERTAS */
+.ofertas-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-bottom:44px; }
+.ocard { border-radius:20px; padding:22px 20px; display:flex; flex-direction:column; gap:8px; background:rgba(255,255,255,.42); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,.75); box-shadow:var(--glass-s); }
+.oc-off { display:inline-flex; align-items:center; background:var(--p1); color:white; font-size:11px; font-weight:800; letter-spacing:.06em; padding:4px 11px; border-radius:100px; width:fit-content; }
+.oc-nome { font-size:15px; font-weight:800; line-height:1.25; color:var(--text); }
+.oc-prod { font-size:12px; color:var(--muted); line-height:1.55; }
+.oc-preco { display:flex; align-items:baseline; gap:10px; margin-top:2px; }
+.oc-old { font-size:13px; color:var(--muted); text-decoration:line-through; }
+.oc-new { font-size:26px; font-weight:800; color:var(--p1); letter-spacing:-.02em; }
+.oc-info { font-size:11px; color:var(--muted); line-height:1.6; }
+.oc-btn { display:inline-flex; align-items:center; gap:6px; background:var(--p1); color:white; font-size:12px; font-weight:700; padding:9px 18px; border-radius:100px; text-decoration:none; transition:all .2s; width:fit-content; margin-top:4px; box-shadow:0 4px 14px rgba(91,55,101,.28); }
+.oc-btn:hover { background:#4a2a52; transform:translateY(-1px); }
+
+/* ATALHOS */
+.atalhos-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.atalho { border-radius:22px; padding:24px 20px; cursor:pointer; transition:transform .2s, box-shadow .2s; display:flex; flex-direction:column; gap:10px; }
+.atalho:hover { transform:translateY(-5px); box-shadow:var(--glass-sh); }
+.a-gl { background:var(--glass); backdrop-filter:blur(24px); border:1px solid var(--glass-b); box-shadow:var(--glass-s); }
+.a-p1 { background:var(--p1); border:1px solid rgba(255,255,255,.15); box-shadow:0 6px 24px rgba(91,55,101,.38), inset 0 1.5px 0 rgba(255,255,255,.22); }
+.a-p2 { background:rgba(158,104,153,.45); backdrop-filter:blur(24px); border:1px solid rgba(255,255,255,.55); box-shadow:var(--glass-s); }
+.a-dk { background:var(--dark-g); backdrop-filter:blur(24px); border:1px solid var(--dark-gb); box-shadow:0 6px 24px rgba(0,0,0,.22), inset 0 1.5px 0 rgba(255,255,255,.12); }
+.a-icon { width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:18px; }
+.a-gl .a-icon { background:rgba(91,55,101,.1); }
+.a-p1 .a-icon, .a-dk .a-icon { background:rgba(255,255,255,.12); }
+.a-p2 .a-icon { background:rgba(255,255,255,.2); }
+.atalho h3 { font-size:15px; font-weight:700; }
+.a-gl h3, .a-p2 h3 { color:var(--text); }
+.a-p1 h3, .a-dk h3 { color:white; }
+.atalho p { font-size:12px; line-height:1.55; flex:1; }
+.a-gl p { color:var(--muted); }
+.a-p2 p { color:rgba(42,16,48,.6); }
+.a-p1 p, .a-dk p { color:rgba(255,255,255,.55); }
+.a-cta { font-size:12px; font-weight:600; }
+.a-gl .a-cta { color:var(--p1); }
+.a-p2 .a-cta { color:var(--p1); }
+.a-p1 .a-cta, .a-dk .a-cta { color:rgba(255,255,255,.8); }
+
+/* DESAFIOS */
+.desafios-h { margin-bottom:36px; }
+.desafios-h h2 { font-family:'Playfair Display',Georgia,serif; font-size:40px; font-weight:700; margin-bottom:6px; }
+.desafios-h h2 em { color:var(--p1); font-style:italic; }
+.desafios-h p { font-size:14px; color:var(--muted); }
+.proximo-desafio { border-radius:26px; padding:52px 40px; margin-bottom:28px; text-align:center; }
+.pd-icon { font-size:38px; margin-bottom:14px; }
+.pd-title { font-family:'Playfair Display',Georgia,serif; font-size:26px; font-weight:700; margin-bottom:10px; }
+.pd-desc { font-size:14px; color:var(--muted); line-height:1.7; max-width:480px; margin:0 auto; }
+.desafios-anteriores { margin-top:8px; }
+.da-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+.da-card { background:var(--glass); backdrop-filter:blur(20px); border:1px solid var(--glass-b); box-shadow:var(--glass-s); border-radius:20px; padding:24px 22px; position:relative; }
+.da-status { position:absolute; top:14px; right:16px; font-size:10px; font-weight:700; letter-spacing:.05em; padding:4px 10px; border-radius:100px; }
+.da-status.ok  { background:rgba(180,240,180,.4); color:#1a5a1a; }
+.da-status.enc { background:rgba(91,55,101,.12); color:var(--p1); }
+.da-card-num { font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.da-card h4 { font-size:16px; font-weight:700; margin-bottom:6px; }
+.da-card p { font-size:13px; color:var(--muted); line-height:1.55; }
+.da-card-ht { display:inline-block; font-size:12px; font-weight:700; color:var(--p1); margin-top:10px; background:rgba(91,55,101,.1); padding:4px 10px; border-radius:100px; }
+
+/* VENDAS */
+.vendas-split { display:grid; grid-template-columns:1fr 390px; gap:28px; align-items:start; }
+.vendas-copy h2 { font-family:'Playfair Display',Georgia,serif; font-size:44px; font-weight:700; line-height:1.1; margin-bottom:14px; }
+.vendas-copy h2 em { color:var(--p1); font-style:italic; }
+.vendas-copy p { font-size:15px; color:var(--muted); line-height:1.7; }
+.vendas-card { border-radius:26px; overflow:hidden; box-shadow:var(--glass-s); }
+.vc-top { background:var(--p1); padding:32px 28px; position:relative; overflow:hidden; }
+.vc-top::before { content:''; position:absolute; top:-50px; right:-40px; width:180px; height:180px; background:rgba(214,168,196,.2); border-radius:50%; }
+.vc-top .ico { font-size:36px; display:block; margin-bottom:12px; position:relative; }
+.vc-top h3 { font-size:17px; font-weight:700; color:white; margin-bottom:7px; position:relative; }
+.vc-top p { font-size:13px; color:rgba(255,255,255,.58); line-height:1.6; position:relative; }
+.vc-bot { background:rgba(255,255,255,.7); backdrop-filter:blur(20px); padding:20px 28px; border-top:1px solid rgba(255,255,255,.5); }
+.btn { display:inline-flex; align-items:center; gap:8px; background:var(--p1); color:white; font-size:14px; font-weight:600; padding:12px 24px; border-radius:100px; text-decoration:none; transition:all .2s; font-family:inherit; border:none; cursor:pointer; box-shadow:0 6px 20px rgba(91,55,101,.35); }
+.btn:hover { background:#4a2a52; transform:translateY(-2px); }
+.vc-hint { font-size:11px; color:var(--muted); margin-top:9px; }
+
+/* REFERÊNCIAS */
+.refs-h { margin-bottom:28px; }
+.refs-heading { font-family:'Playfair Display',Georgia,serif; font-size:40px; font-weight:700; line-height:1.1; margin-bottom:6px; }
+.refs-heading em { color:var(--p1); font-style:italic; }
+.refs-sub { font-size:14px; color:var(--muted); }
+.date-badge { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:600; background:rgba(214,168,196,.4); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.65); color:var(--p1); padding:5px 13px; border-radius:100px; margin-top:10px; }
+.filtros { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:20px 0 10px; }
+.fl { font-size:11px; font-weight:600; color:var(--muted); margin-right:2px; }
+.fb { padding:7px 15px; border-radius:100px; border:1.5px solid rgba(91,55,101,.2); background:rgba(255,255,255,.45); backdrop-filter:blur(12px); color:var(--text); font-size:12px; font-weight:500; cursor:pointer; transition:all .15s; font-family:inherit; }
+.fb.on { background:var(--p1); color:white; border-color:var(--p1); box-shadow:0 4px 14px rgba(91,55,101,.3); }
+.fb:hover:not(.on) { background:rgba(255,255,255,.7); }
+.div { border:none; border-top:1px solid rgba(91,55,101,.1); margin:12px 0 22px; }
+.refs-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.rc { background:rgba(255,255,255,.45); backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px); border:1px solid rgba(255,255,255,.75); box-shadow:0 4px 24px rgba(91,55,101,.09), inset 0 1.5px 0 rgba(255,255,255,.9); border-radius:18px; overflow:hidden; cursor:pointer; transition:transform .2s, box-shadow .2s; }
+.rc:hover { transform:translateY(-5px); box-shadow:0 18px 44px rgba(91,55,101,.17), inset 0 1.5px 0 rgba(255,255,255,.9); }
+.rc-thumb { width:100%; aspect-ratio:4/5; position:relative; overflow:hidden; background:#1a0028; }
+.rc-frame-bg { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.rc-frame-bg iframe { width:100%; height:720px; border:none; display:block; margin-top:-44px; }
+.rc-plat { position:absolute; top:10px; right:10px; background:rgba(0,0,0,.45); backdrop-filter:blur(8px); color:rgba(255,255,255,.9); font-size:9px; font-weight:700; letter-spacing:.04em; padding:4px 9px; border-radius:100px; z-index:3; }
+.rc-thumb-bottom { position:absolute; bottom:0; left:0; right:0; padding:14px; background:linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 100%); z-index:3; }
+.rc-thumb-format { display:inline-block; font-size:9px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; color:rgba(255,255,255,.82); background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); padding:3px 8px; border-radius:100px; width:fit-content; margin-bottom:7px; }
+.rc-thumb-title { font-family:'Playfair Display',Georgia,serif; font-size:14px; font-weight:700; color:white; line-height:1.25; text-shadow:0 1px 10px rgba(0,0,0,.5); }
+.rc-play { position:absolute; top:calc(50% - 20px); left:50%; transform:translate(-50%,-50%); width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,.2); backdrop-filter:blur(10px); border:1.5px solid rgba(255,255,255,.42); display:flex; align-items:center; justify-content:center; color:white; font-size:17px; transition:all .2s; z-index:3; padding-left:3px; }
+.rc:hover .rc-play { background:rgba(255,255,255,.32); transform:translate(-50%,-50%) scale(1.1); border-color:rgba(255,255,255,.6); }
+.rc-body { padding:13px 14px 15px; }
+.rc-tags { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:7px; }
+.rtag { font-size:10px; font-weight:700; letter-spacing:.04em; padding:3px 8px; border-radius:100px; }
+.ts { background:rgba(214,168,196,.4); color:var(--p1); }
+.tm { background:rgba(186,136,174,.3); color:var(--p1); }
+.tt { background:rgba(91,55,101,.1); color:var(--p2); }
+.tf { background:rgba(91,55,101,.07); color:var(--muted); }
+.rc-tit { font-size:14px; font-weight:700; margin-bottom:4px; line-height:1.3; }
+.rc-desc { font-size:12px; color:var(--muted); line-height:1.5; margin-bottom:11px; }
+.rc-ft { display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(91,55,101,.07); padding-top:9px; }
+.rc-num { font-size:11px; color:rgba(91,55,101,.3); }
+.rc-arr { width:26px; height:26px; border-radius:50%; background:rgba(91,55,101,.08); display:flex; align-items:center; justify-content:center; font-size:11px; transition:all .15s; }
+.rc:hover .rc-arr { background:var(--p1); color:white; }
+
+/* PRODUTOS */
+.ph { margin-bottom:40px; }
+.ph h2 { font-family:'Playfair Display',Georgia,serif; font-size:40px; font-weight:700; margin-bottom:6px; }
+.ph h2 em { color:var(--p1); font-style:italic; }
+.ph p { font-size:14px; color:var(--muted); }
+.psec { margin-bottom:52px; }
+.psec-lbl { display:flex; align-items:center; gap:12px; font-size:13px; font-weight:600; color:var(--p2); margin-bottom:20px; }
+.psec-lbl::after { content:''; flex:1; height:1px; background:rgba(91,55,101,.12); }
+.pgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.pc { background:rgba(255,255,255,.45); backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px); border:1px solid rgba(255,255,255,.75); box-shadow:0 4px 24px rgba(91,55,101,.09), inset 0 1.5px 0 rgba(255,255,255,.9); border-radius:22px; overflow:hidden; transition:transform .2s, box-shadow .2s; }
+.pc:hover { transform:translateY(-4px); box-shadow:0 18px 44px rgba(91,55,101,.17), inset 0 1.5px 0 rgba(255,255,255,.9); }
+.pc-img { position:relative; width:100%; aspect-ratio:1; display:flex; align-items:center; justify-content:center; overflow:hidden; background:rgba(214,168,196,.22); }
+.pc-img img { width:100%; height:100%; object-fit:cover; object-position:center; }
+.pc-badge { position:absolute; top:12px; left:12px; background:var(--p1); color:white; font-size:9px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; padding:4px 10px; border-radius:100px; }
+.pc-body { padding:17px 17px 19px; }
+.pc-cat { font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+.pc-nome { font-size:15px; font-weight:800; margin-bottom:7px; line-height:1.25; letter-spacing:-.01em; }
+.pc-desc { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:11px; }
+.pc-usos { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:11px; }
+.ut { font-size:10px; font-weight:600; padding:3px 9px; border-radius:100px; }
+.up { background:rgba(214,168,196,.4); color:var(--p1); }
+.ud { background:rgba(91,55,101,.1); color:var(--p2); }
+.ug { background:rgba(180,230,200,.5); color:#1a4a2a; }
+.pc-blk { background:rgba(91,55,101,.05); border-radius:12px; padding:10px 12px; margin-bottom:9px; }
+.pc-blk-lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--p2); margin-bottom:3px; }
+.pc-blk-txt { font-size:12px; color:var(--muted); line-height:1.65; }
+.pc-ft { display:flex; align-items:center; justify-content:space-between; padding-top:13px; border-top:1px solid rgba(91,55,101,.07); }
+.pc-vol { font-size:11px; color:rgba(91,55,101,.35); }
+.pc-link { font-size:12px; font-weight:700; color:var(--p1); text-decoration:none; }
+.pc-link:hover { text-decoration:underline; }
+
+/* CAROUSEL */
+.pc-img .slide { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; opacity:0; transition:opacity .35s ease; }
+.pc-img .slide.on { opacity:1; }
+.ci-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.88); backdrop-filter:blur(6px); border:none; border-radius:50%; width:28px; height:28px; cursor:pointer; font-size:16px; font-weight:700; display:flex; align-items:center; justify-content:center; color:var(--p1); opacity:0; transition:opacity .2s; z-index:2; box-shadow:0 2px 8px rgba(0,0,0,.15); }
+.pc-img:hover .ci-nav { opacity:1; }
+.ci-nav.lft { left:8px; }
+.ci-nav.rgt { right:8px; }
+.ci-dots { position:absolute; bottom:9px; left:0; right:0; display:flex; gap:5px; justify-content:center; z-index:2; pointer-events:none; }
+.ci-dot { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.5); cursor:pointer; transition:background .15s, transform .15s; border:none; padding:0; pointer-events:all; }
+.ci-dot.on { background:white; transform:scale(1.3); }
+
+@media(max-width:960px){
+  .hero-split,.vendas-split{ grid-template-columns:1fr; }
+  .hero-right { flex-direction:row; }
+  .refs-grid,.pgrid { grid-template-columns:repeat(2,1fr); }
+  .mural-grid,.atalhos-grid,.da-grid,.ofertas-grid { grid-template-columns:1fr; }
+}
+@media(max-width:600px){
+  .refs-grid,.pgrid { grid-template-columns:1fr; }
+  .wrap { padding:28px 16px; }
+  .refs-heading,.ph h2,.desafios-h h2,.vendas-copy h2,.hero-title { font-size:30px; }
+  .atalhos-grid { grid-template-columns:repeat(2,1fr); }
+}
+
+/* MODAL REFERÊNCIAS */
+.ref-modal { display:none; position:fixed; inset:0; z-index:1000; background:rgba(25,0,35,.75); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); align-items:center; justify-content:center; padding:20px; }
+.ref-modal.open { display:flex; }
+.ref-modal-box { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-radius:28px; overflow:hidden; display:flex; align-items:stretch; max-height:90vh; position:relative; box-shadow:0 28px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.15); max-width:660px; width:100%; }
+.ref-modal-iframe-wrap { width:320px; min-width:320px; background:#000; }
+.ref-modal-iframe-wrap iframe { width:100%; height:100%; min-height:570px; display:block; border:none; }
+.ref-modal-info { flex:1; padding:30px 26px 26px; display:flex; flex-direction:column; gap:10px; min-width:200px; }
+.ref-modal-close { position:absolute; top:12px; right:12px; width:32px; height:32px; border-radius:50%; border:none; background:rgba(255,255,255,.12); color:rgba(255,255,255,.8); font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s; z-index:10; line-height:1; }
+.ref-modal-close:hover { background:rgba(255,255,255,.26); color:white; }
+.ref-modal-cat { font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--p4); }
+.ref-modal-title { font-family:'Playfair Display',Georgia,serif; font-size:20px; font-weight:700; color:white; line-height:1.25; }
+.ref-modal-desc { font-size:13px; color:rgba(255,255,255,.62); line-height:1.7; flex:1; }
+.ref-modal-link { display:inline-flex; align-items:center; gap:6px; color:white; font-size:12px; font-weight:600; background:rgba(255,255,255,.13); border:1px solid rgba(255,255,255,.22); padding:9px 16px; border-radius:100px; text-decoration:none; transition:all .15s; width:fit-content; margin-top:auto; }
+.ref-modal-link:hover { background:rgba(255,255,255,.22); }
+@media(max-width:640px){
+  .ref-modal-box { flex-direction:column; max-height:95vh; overflow-y:auto; }
+  .ref-modal-iframe-wrap { width:100%; min-width:0; }
+  .ref-modal-iframe-wrap iframe { min-height:420px; }
+}
+</style>
+</head>
+<body>
+<div class="bg-canvas"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tb-inner">
+    <div class="logo-wrap">
+      <span class="logo-main">Le Moritz</span>
+      <span class="logo-sub">Science &amp; Beauty</span>
+    </div>
+    <nav class="nav">
+      <button class="nb on"  onclick="go('home')">Home</button>
+      <button class="nb"     onclick="go('desafios')">Desafios</button>
+      <button class="nb"     onclick="go('vendas')">Vendas</button>
+      <button class="nb"     onclick="go('refs')">Referências</button>
+      <button class="nb"     onclick="go('produtos')">Produtos</button>
+    </nav>
+  </div>
+</div>
+
+<!-- ═══ HOME ═══ -->
+<div class="tab on" id="tab-home"><div class="wrap">
+  <div class="home-hero">
+    <div class="hero-split">
+      <div class="hero-photo">
+        <img src="Fotos/home.jpg" alt="Le Moritz VIPs" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,var(--p1),var(--p2))'">
+        <div class="hero-overlay">
+          <span class="hero-pill">Portal ativo · Junho 2026</span>
+          <h1 class="hero-title">Olá,<br><em>VIPs Le Moritz</em> ✦</h1>
+          <p class="hero-sub">Referências, produtos e métricas em um só lugar.</p>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hcard dk gd">
+          <span class="hcard-lbl">Próximos desafios</span>
+          <span class="hcard-val">Em breve</span>
+          <span class="hcard-sub">Aguarde novidades 💜</span>
+        </div>
+        <div class="hcard lt g">
+          <span class="hcard-lbl">Novidade</span>
+          <span class="hcard-val">2 lançamentos</span>
+          <span class="hcard-sub">Rosa Mauve + Marrom Café</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="sec-lbl">📌 Mural</p>
+  <div class="mural-grid">
+    <div class="mcard mc1">
+      <span class="mcard-tag">Desafios</span>
+      <h3>Próximo desafio em breve</h3>
+      <p>Um novo desafio está sendo preparado. Você será avisada pelo WhatsApp assim que estiver disponível.</p>
+      <span class="mcard-date">Aguarde</span>
+    </div>
+    <div class="mcard mc2">
+      <span class="mcard-tag">Novidade</span>
+      <h3>Lançamento: novos Sticks</h3>
+      <p>O <strong>Stick Rosa Mauve</strong> e o <strong>Stick Marrom Café</strong> chegaram! Criem conteúdo dos lançamentos.</p>
+      <span class="mcard-date">09/06/2026</span>
+    </div>
+  </div>
+
+  <p class="sec-lbl">🛍️ Ofertas do mês</p>
+  <div class="ofertas-grid">
+    <div class="ocard">
+      <span class="oc-off">49% OFF</span>
+      <div class="oc-nome">Kit Lifting e Firmeza para Olhos</div>
+      <div class="oc-prod">Sérum Redutor Instantâneo de Linhas · Sérum Revitalizador de Olhos · Máscara de Cílios Regenerativa</div>
+      <div class="oc-preco"><span class="oc-old">R$491</span><span class="oc-new">R$247</span></div>
+      <div class="oc-info">✓ Frete grátis acima de R$100 &nbsp;·&nbsp; ✓ 5% OFF no PIX</div>
+      <a href="https://lemoritz.com.br/products/kit-lifting-e-firmeza-para-olhos" target="_blank" class="oc-btn">Ver oferta ↗</a>
+    </div>
+    <div class="ocard">
+      <span class="oc-off">50% OFF</span>
+      <div class="oc-nome">Kit Rotina de Hidratação</div>
+      <div class="oc-prod">Mousse de Limpeza · Sérum Revitalizador de Olhos · Creme Antirrugas · Tônico Essência Hidratante</div>
+      <div class="oc-preco"><span class="oc-old">R$518</span><span class="oc-new">R$257</span></div>
+      <div class="oc-info">✓ Frete grátis acima de R$100 &nbsp;·&nbsp; ✓ 5% OFF no PIX</div>
+      <a href="https://lemoritz.com.br/products/kit-rotina-de-hidratacao-le-moritz" target="_blank" class="oc-btn">Ver oferta ↗</a>
+    </div>
+    <div class="ocard">
+      <span class="oc-off">Até 35% OFF</span>
+      <div class="oc-nome">Monte seu Kit</div>
+      <div class="oc-prod">Escolha os produtos que você mais gosta e economize mais conforme a quantidade</div>
+      <div class="oc-preco" style="display:block;">
+        <div style="font-size:12px; color:var(--muted); line-height:1.9;">
+          2 produtos → <strong style="color:var(--p1);">15% OFF</strong><br>
+          3 produtos → <strong style="color:var(--p1);">25% OFF</strong><br>
+          4+ produtos → <strong style="color:var(--p1);">35% OFF</strong>
+        </div>
+      </div>
+      <div class="oc-info">✓ Frete grátis &nbsp;·&nbsp; ✓ 5% OFF no PIX</div>
+      <a href="https://lemoritz.com.br/pages/monte-seu-kit" target="_blank" class="oc-btn">Montar kit ↗</a>
+    </div>
+    <div class="ocard">
+      <span class="oc-off">50% OFF</span>
+      <div class="oc-nome">Kit Pele Glow e Olhos Marcantes</div>
+      <div class="oc-prod">Stick Terracota · Stick Rosê · Stick Hidratante FPS 50 · Máscara Regenerativa + Pincel de brinde</div>
+      <div class="oc-preco"><span class="oc-old">R$588</span><span class="oc-new">R$297</span></div>
+      <div class="oc-info">✓ Pincel 9 em 1 de brinde &nbsp;·&nbsp; ✓ Frete grátis &nbsp;·&nbsp; ✓ 5% OFF no PIX</div>
+      <a href="https://lemoritz.com.br/products/kit-pele-glow-olhos-marcantes-le-moritz-coral-dourado" target="_blank" class="oc-btn">Ver oferta ↗</a>
+    </div>
+  </div>
+
+  <p class="sec-lbl">🔗 Acesso rápido</p>
+  <div class="atalhos-grid">
+    <div class="atalho a-p1" onclick="go('desafios')">
+      <div class="a-icon">⚡</div>
+      <h3>Desafios</h3>
+      <p>Histórico completo das missões e próximos desafios.</p>
+      <span class="a-cta">Ver desafios →</span>
+    </div>
+    <div class="atalho a-gl" onclick="go('vendas')">
+      <div class="a-icon">💰</div>
+      <h3>Minhas Vendas</h3>
+      <p>Performance do cupom em tempo real — conversões e comissões.</p>
+      <span class="a-cta">Acessar dashboard →</span>
+    </div>
+    <div class="atalho a-p2" onclick="go('refs')">
+      <div class="a-icon">🎬</div>
+      <h3>Referências</h3>
+      <p>Reels em alta no Instagram para inspirar seus conteúdos.</p>
+      <span class="a-cta">Ver referências →</span>
+    </div>
+    <div class="atalho a-dk" onclick="go('produtos')">
+      <div class="a-icon">✨</div>
+      <h3>Catálogo</h3>
+      <p>Todos os produtos com ativos e modo de uso.</p>
+      <span class="a-cta">Ver produtos →</span>
+    </div>
+  </div>
+</div></div>
+
+<!-- ═══ DESAFIOS ═══ -->
+<div class="tab" id="tab-desafios"><div class="wrap">
+  <div class="desafios-h">
+    <h2>Desafios das <em>VIPs</em></h2>
+    <p>Participe, crie conteúdo e acompanhe cada missão.</p>
+  </div>
+
+  <div class="proximo-desafio g">
+    <div class="pd-icon">⏳</div>
+    <div class="pd-title">Próximo desafio em breve</div>
+    <p class="pd-desc">Um novo desafio está sendo preparado especialmente para vocês. Você será avisada pelo WhatsApp assim que estiver disponível.</p>
+  </div>
+
+
+</div></div>
+
+<!-- ═══ VENDAS ═══ -->
+<div class="tab" id="tab-vendas"><div class="wrap">
+  <div class="vendas-split">
+    <div class="vendas-copy">
+      <h2>Minhas<br><em>vendas</em></h2>
+      <p>Acompanhe o desempenho do seu cupom em tempo real — conversões, cliques e resultado das suas indicações.</p>
+    </div>
+    <div class="vendas-card">
+      <div class="vc-top">
+        <span class="ico">📊</span>
+        <h3>Dashboard de Performance</h3>
+        <p>Pesquise pelo seu cupom e veja os resultados.</p>
+      </div>
+      <div class="vc-bot">
+        <a href="https://dashboard-influ-lemoritz.vercel.app/" target="_blank" class="btn">Acessar dashboard ↗</a>
+        <p class="vc-hint">Abre em nova aba · Performance de Cupom · Le Moritz</p>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ═══ REFERÊNCIAS ═══ -->
+<div class="tab" id="tab-refs"><div class="wrap">
+  <div class="refs-h">
+    <h2 class="refs-heading">Referências <em>Instagram</em></h2>
+    <p class="refs-sub">Reels em alta para inspirar seus conteúdos. Clique para acessar.</p>
+    <span class="date-badge">✦ Atualizado em 09 de junho de 2026</span>
+  </div>
+  <div class="filtros">
+    <span class="fl">Filtrar por</span>
+    <button class="fb on" onclick="filt('todos',this)">Todos</button>
+    <button class="fb" onclick="filt('skincare',this)">Skincare pele madura</button>
+    <button class="fb" onclick="filt('make',this)">Make pele madura</button>
+    <button class="fb" onclick="filt('tendencias',this)">Tendências gerais</button>
+  </div>
+  <hr class="div">
+  <div class="refs-grid" id="rg"></div>
+</div></div>
+
+<!-- ═══ PRODUTOS ═══ -->
+<div class="tab" id="tab-produtos"><div class="wrap">
+  <div class="ph">
+    <h2>Catálogo de <em>produtos</em></h2>
+    <p>Conheça cada produto Le Moritz — descrição, ativos e modo de uso para embasar seus vídeos.</p>
+  </div>
+
+  <!-- MAQUIAGEM -->
+  <div class="psec">
+    <div class="psec-lbl">💄 Maquiagem</div>
+    <div class="pgrid">
+
+      <!-- MAUVE -->
+      <div class="pc"><div class="pc-img" id="pci-mauve"><img src="Fotos/rosa-mauve-textura.jpg" class="slide on" alt="Rosa Mauve"><img src="Fotos/rosa-mauve-bastao.jpg" class="slide" alt="Rosa Mauve"><button class="ci-nav lft" onclick="ci('pci-mauve',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-mauve',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-mauve',0)"></button><button class="ci-dot" onclick="ciGo('pci-mauve',1)"></button></div><span class="pc-badge">Lançamento</span></div><div class="pc-body"><div class="pc-cat">Stick multifuncional · 8g</div><div class="pc-nome">Stick Blush Rosa Mauve</div><p class="pc-desc">Subtom frio/neutro. Textura cremosa buildable — 3 funções em um stick que não marca linhas de expressão.</p><div class="pc-usos"><span class="ut up">Blush</span><span class="ut up">Batom</span><span class="ut up">Sombra</span></div><div class="pc-blk"><div class="pc-blk-lbl">Ativos</div><div class="pc-blk-txt">Vitamina E · Manteiga de Karité · Blend de Óleos Naturais (Jojoba, Rícino, Coco)</div></div><div class="pc-blk"><div class="pc-blk-lbl">Modo de uso</div><div class="pc-blk-txt">Blush: passe nas maçãs em direção à têmpora e esfume. Batom: aplique diretamente nos lábios. Sombra: aplique na pálpebra com toque leve e esfume.</div></div><div class="pc-ft"><span class="pc-vol">Embalagem maior · 8g</span><a href="https://lemoritz.com.br/products/stick-blush-rosa-mauve-le-moritz" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+      <!-- MARROM CAFÉ -->
+      <div class="pc"><div class="pc-img" id="pci-cafe"><img src="Fotos/marrom-cafe-textura.jpg" class="slide on" alt="Marrom Café"><img src="Fotos/marrom-cafe-bastao.jpg" class="slide" alt="Marrom Café"><button class="ci-nav lft" onclick="ci('pci-cafe',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-cafe',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-cafe',0)"></button><button class="ci-dot" onclick="ciGo('pci-cafe',1)"></button></div><span class="pc-badge">Lançamento</span></div><div class="pc-body"><div class="pc-cat">Stick multifuncional · 8g</div><div class="pc-nome">Stick Marrom Café</div><p class="pc-desc">Subtom quente/neutro, esfuma fácil. Primeiro contorno para pele madura da Le Moritz — versátil em 4 funções.</p><div class="pc-usos"><span class="ut ug">Contorno</span><span class="ut up">Sombra</span><span class="ut ud">Bronzer</span><span class="ut up">Batom</span></div><div class="pc-blk"><div class="pc-blk-lbl">Ativos</div><div class="pc-blk-txt">Vitamina E · Manteiga de Karité · Blend de Óleos Naturais (Jojoba, Rícino, Coco)</div></div><div class="pc-blk"><div class="pc-blk-lbl">Modo de uso</div><div class="pc-blk-txt">Definir: aplique abaixo das maçãs, lateral do nariz e mandíbula. Sombra: aplique na pálpebra e esfume. Bronzer: testa, maçãs e nariz. Batom: aplique nos lábios.</div></div><div class="pc-ft"><span class="pc-vol">Embalagem maior · 8g</span><a href="https://lemoritz.com.br/products/stick-blush-marrom-cafe-le-moritz" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+      <!-- TERRACOTA -->
+      <div class="pc"><div class="pc-img" id="pci-terra"><img src="Fotos/terracota-textura.jpg" class="slide on" alt="Stick Terracota"><img src="Fotos/terracota-bastao.jpg" class="slide" alt="Stick Terracota"><button class="ci-nav lft" onclick="ci('pci-terra',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-terra',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-terra',0)"></button><button class="ci-dot" onclick="ciGo('pci-terra',1)"></button></div></div><div class="pc-body"><div class="pc-cat">Stick multifuncional · 6g</div><div class="pc-nome">Stick Blush Terracota</div><p class="pc-desc">Tom terracota com subtom neutro/quente. Quatro funções em um stick compacto.</p><div class="pc-usos"><span class="ut up">Batom</span><span class="ut up">Sombra</span><span class="ut up">Blush</span><span class="ut ug">Contorno</span></div><div class="pc-blk"><div class="pc-blk-lbl">Ativos</div><div class="pc-blk-txt">Óleo de Farelo de Arroz · Manteiga de Karité · Óleo de Amêndoas · Vitamina E · Seda de Arroz · Cera de Girassol</div></div><div class="pc-blk"><div class="pc-blk-lbl">Modo de uso</div><div class="pc-blk-txt">Aplique no osso próximo à orelha, maçãs do rosto, pálpebras ou lábios. Esfume com os dedos.</div></div><div class="pc-ft"><span class="pc-vol">~120 aplicações</span><a href="https://lemoritz.com.br/products/stick-blush-terracota-le-moritz" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+      <!-- CORAL -->
+      <div class="pc"><div class="pc-img" id="pci-coral"><img src="Fotos/coral-textura.jpg" class="slide on" alt="Stick Coral"><img src="Fotos/coral-bastao.jpg" class="slide" alt="Stick Coral"><button class="ci-nav lft" onclick="ci('pci-coral',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-coral',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-coral',0)"></button><button class="ci-dot" onclick="ciGo('pci-coral',1)"></button></div></div><div class="pc-body"><div class="pc-cat">Stick multifuncional · 6g</div><div class="pc-nome">Stick Blush Coral</div><p class="pc-desc">Tom coral quente que traz vida ao rosto em segundos. Textura cremosa que não pesa nem marca linhas de expressão.</p><div class="pc-usos"><span class="ut up">Batom</span><span class="ut up">Blush</span><span class="ut up">Sombra</span></div><div class="pc-blk"><div class="pc-blk-lbl">Ativos</div><div class="pc-blk-txt">Manteiga de Karité · Óleo de Amêndoas · Óleo de Rosa Mosqueta · Vitamina E · Seda de Arroz</div></div><div class="pc-blk"><div class="pc-blk-lbl">Modo de uso</div><div class="pc-blk-txt">Aplique nas maçãs (blush), lábios (batom) ou pálpebras (sombra). Esfume com os dedos.</div></div><div class="pc-ft"><span class="pc-vol">~120 aplicações</span><a href="https://lemoritz.com.br/products/lemoritz-stick-coral" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+      <!-- ROSÊ -->
+      <div class="pc"><div class="pc-img" id="pci-rose"><img src="Fotos/rose-textura.jpg" class="slide on" alt="Stick Rosê"><img src="Fotos/rose-bastao.jpg" class="slide" alt="Stick Rosê"><button class="ci-nav lft" onclick="ci('pci-rose',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-rose',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-rose',0)"></button><button class="ci-dot" onclick="ciGo('pci-rose',1)"></button></div></div><div class="pc-body"><div class="pc-cat">Stick iluminador · 6g</div><div class="pc-nome">Stick Iluminador Rosê</div><p class="pc-desc">Glow sofisticado e radiante. Tom rosado que realça os pontos estratégicos do rosto maduro com leveza.</p><div class="pc-usos"><span class="ut ud">Iluminador</span><span class="ut up">Blush luminoso</span><span class="ut up">Sombra</span></div><div class="pc-blk"><div class="pc-blk-lbl">Ativos</div><div class="pc-blk-txt">Manteiga de Karité · Óleo de Amêndoas · Óleo de Rosa Mosqueta · Vitamina E</div></div><div class="pc-blk"><div class="pc-blk-lbl">Modo de uso</div><div class="pc-blk-txt">Aplique no alto das maçãs, arco do cupido, ponta do nariz e pálpebras. Espalhe com a ponta dos dedos sem marcar linhas.</div></div><div class="pc-ft"><span class="pc-vol">~120 aplicações</span><a href="https://lemoritz.com.br/products/stick-iluminador-rose" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+      <!-- DOURADO -->
+      <div class="pc"><div class="pc-img" id="pci-dour"><img src="Fotos/dourado-textura.jpg" class="slide on" alt="Stick Dourado"><img src="Fotos/dourado-bastao.jpg" class="slide" alt="Stick Dourado"><button class="ci-nav lft" onclick="ci('pci-dour',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-dour',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-dour',0)"></button><button class="ci-dot" onclick="ciGo('pci-dour',1)"></button></div></div><div class="pc-body"><div class="pc-cat">Stick iluminador · 6g</div><div class="pc-nome">Stick Iluminador Dourado</div><p class="pc-desc">Destaca pontos estratégicos e cria um bronzeado suave. Brilho elegante sem artificialidade.</p><div class="pc-usos"><span class="ut ud">Iluminador</span><span class="ut ud">Bronzer</span></div><div class="pc-blk"><div class="pc-blk-lbl">Ativos</div><div class="pc-blk-txt">Óleo de Farelo de Arroz · Manteiga de Karité · Óleo de Amêndoas · Vitamina E · Seda de Arroz · Cera de Girassol</div></div><div class="pc-blk"><div class="pc-blk-lbl">Modo de uso</div><div class="pc-blk-txt">Aplique nas têmporas, maçãs, abaixo da sobrancelha e arco do cupido. Dê leves batidinhas com os dedos.</div></div><div class="pc-ft"><span class="pc-vol">~120 aplicações</span><a href="https://lemoritz.com.br/products/stick-iluminador-dourado-le-moritz" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+      <!-- MÁSCARA -->
+      <div class="pc"><div class="pc-img" id="pci-masc"><img src="Fotos/máscara-capa.jpg" class="slide on" alt="Máscara"><img src="Fotos/máscara-segunda.jpg" class="slide" alt="Máscara"><button class="ci-nav lft" onclick="ci('pci-masc',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-masc',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-masc',0)"></button><button class="ci-dot" onclick="ciGo('pci-masc',1)"></button></div></div><div class="pc-body"><div class="pc-cat">Máscara de cílios pro-age · 10ml</div><div class="pc-nome">Máscara de Cílios Regenerativa</div><p class="pc-desc">A primeira máscara pro-age do Brasil. Define até os cílios mais finos por 16 horas, sem borrar nem empelotar. Nutre e estimula o crescimento dos fios.</p><div class="pc-usos"><span class="ut ud">Define</span><span class="ut ud">Alonga</span><span class="ut ug">Regenera</span></div><div class="pc-blk"><div class="pc-blk-lbl">Ativos</div><div class="pc-blk-txt">Biotina · Pantenol · Arginina</div></div><div class="pc-blk"><div class="pc-blk-lbl">Modo de uso</div><div class="pc-blk-txt">Aplique da raiz à ponta dos cílios para alongar e definir. Uma camada já entrega um resultado marcante.</div></div><div class="pc-ft"><span class="pc-vol">Até 16 horas</span><a href="https://lemoritz.com.br/products/kit-pele-glow-olhos-marcantes-le-moritz-coral-dourado" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+    </div>
+  </div>
+
+  <!-- SKINCARE -->
+  <div class="psec">
+    <div class="psec-lbl">🧴 Skincare</div>
+    <div class="pgrid">
+
+      <!-- SÉRUM REDUTOR -->
+      <div class="pc"><div class="pc-img" id="pci-ser"><img src="Fotos/serum-redultor-capa.jpg" class="slide on" alt="Sérum Redutor"><img src="Fotos/serum-redultor-segunda.jpg" class="slide" alt="Sérum Redutor"><button class="ci-nav lft" onclick="ci('pci-ser',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-ser',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-ser',0)"></button><button class="ci-dot" onclick="ciGo('pci-ser',1)"></button></div></div><div class="pc-body"><div class="pc-cat">Sérum tratamento · 15ml</div><div class="pc-nome">Sérum Redutor Instantâneo de Linhas</div><p class="pc-desc">Efeito botox-like em 3 minutos. Reduz linhas de expressão e bolsas. Efeito dura até 8 horas.</p><div class="pc-usos"><span class="ut ug">Reduz rugas</span><span class="ut ug">Efeito lifting</span><span class="ut ug">Linhas finas</span></div><div class="pc-blk"><div class="pc-blk-lbl">Tecnologia Biotensor-P</div><div class="pc-blk-txt">Acetil Hexapeptídeo-8 · Silicato de Sódio · Silicato de Magnésio e Alumínio</div></div><div class="pc-blk"><div class="pc-blk-lbl">Modo de uso</div><div class="pc-blk-txt">Aplique na pele limpa sob a pálpebra inferior e linhas de expressão. Espalhe com batidinhas suaves, sem esfregar. Aguarde mínimo 3 minutos sem fazer expressões. Espere 15 min antes da maquiagem.</div></div><div class="pc-ft"><span class="pc-vol">Efeito até 8 horas</span><a href="https://lemoritz.com.br/products/serum-redutor-instantaneo-de-linhas-le-moritz" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+      <!-- SÉRUM REVITALIZADOR DE OLHOS -->
+      <div class="pc"><div class="pc-img" id="pci-solhos"><img src="Fotos/serum-revitalizador-capa.jpg" class="slide on" alt="Sérum Olhos"><img src="Fotos/serum-revitalizador-segunda.jpg" class="slide" alt="Sérum Olhos"><button class="ci-nav lft" onclick="ci('pci-solhos',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-solhos',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-solhos',0)"></button><button class="ci-dot" onclick="ciGo('pci-solhos',1)"></button></div></div><div class="pc-body"><div class="pc-cat">Sérum para área dos olhos · Roll-on</div><div class="pc-nome">Sérum Revitalizador de Olhos</div><p class="pc-desc">Formulado para a área mais delicada do rosto. Melhora a aparência de linhas finas, bolsas e sinais de cansaço. Textura leve, absorção rápida, não interfere na maquiagem.</p><div class="pc-usos"><span class="ut ug">Firma</span><span class="ut ug">Desinfla</span><span class="ut ug">Suaviza</span></div><div class="pc-blk"><div class="pc-blk-lbl">Ativos</div><div class="pc-blk-txt">Ácido Hialurônico · Retinyl Palmitate · Silanetriol · Extrato de Café · Ginseng Brasileiro · Peptídeo bio-mimético</div></div><div class="pc-blk"><div class="pc-blk-lbl">Modo de uso</div><div class="pc-blk-txt">Aplique ao redor dos olhos com movimentos suaves do aplicador roll-on, de dentro para fora. Aguarde absorção completa antes da maquiagem. Use 2x ao dia.</div></div><div class="pc-ft"><span class="pc-vol">Aplicador roll-on</span><a href="https://lemoritz.com.br/products/pre-lancamento-serum-revitalizador-de-olhos-le-moritz-1" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+      <!-- MOUSSE -->
+      <div class="pc"><div class="pc-img" id="pci-mousse"><img src="Fotos/mousse-capa.jpg" class="slide on" alt="Mousse"><img src="Fotos/mousse-segunda.jpg" class="slide" alt="Mousse"><button class="ci-nav lft" onclick="ci('pci-mousse',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-mousse',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-mousse',0)"></button><button class="ci-dot" onclick="ciGo('pci-mousse',1)"></button></div></div><div class="pc-body"><div class="pc-cat">Limpeza facial · 100ml</div><div class="pc-nome">Mousse de Limpeza Revitalizante</div><p class="pc-desc">Limpeza eficaz e gentil que respeita a pele madura. Remove maquiagem, protetor solar e resíduos sem repuxar, ressecar ou irritar. Espuma cremosa com 7 extratos calmantes.</p><div class="pc-usos"><span class="ut ug">Limpa</span><span class="ut ug">Hidrata</span><span class="ut ug">Não resseca</span></div><div class="pc-blk"><div class="pc-blk-lbl">Ativos</div><div class="pc-blk-txt">Ácido Hialurônico · Aloe Vera · Extrato de Aveia · Calêndula · Camomila · Extrato de Maçã</div></div><div class="pc-blk"><div class="pc-blk-lbl">Modo de uso</div><div class="pc-blk-txt">Aplique no rosto úmido, massageie suavemente e enxágue bem. Use de manhã e à noite.</div></div><div class="pc-ft"><span class="pc-vol">100ml</span><a href="https://lemoritz.com.br/products/mousse-de-limpeza-revitalizante-le-moritz" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+      <!-- TÔNICO -->
+      <div class="pc"><div class="pc-img" id="pci-ton"><img src="Fotos/tonico-capa.jpg" class="slide on" alt="Tônico"><img src="Fotos/tonico-segunda.jpg" class="slide" alt="Tônico"><button class="ci-nav lft" onclick="ci('pci-ton',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-ton',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-ton',0)"></button><button class="ci-dot" onclick="ciGo('pci-ton',1)"></button></div></div><div class="pc-body"><div class="pc-cat">Tônico essência · 120ml</div><div class="pc-nome">Tônico Essência Hidratante 8 em 1</div><p class="pc-desc">Produto multifuncional 8 em 1: hidrata, acalma, equilibra o pH, remove impurezas, demaquila, refresca, ilumina e estimula o colágeno. Fórmula feita para a pele madura.</p><div class="pc-usos"><span class="ut ug">Hidrata</span><span class="ut ug">Tonifica</span><span class="ut ud">Ilumina</span></div><div class="pc-blk"><div class="pc-blk-lbl">Ativos</div><div class="pc-blk-txt">Ácido Hialurônico · Niacinamida · Aloe Vera · Pantenol · Tripeptídeo de Cobre-1 · Extrato de Maçã</div></div><div class="pc-blk"><div class="pc-blk-lbl">Modo de uso</div><div class="pc-blk-txt">Após a limpeza, aplique com algodão ou direto com as mãos, pressionando levemente no rosto. Não precisa enxaguar.</div></div><div class="pc-ft"><span class="pc-vol">120ml</span><a href="https://lemoritz.com.br/products/tonico-essencia-hidratante-8-em-1-le-moritz" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+      <!-- CREME ANTIRRUGAS -->
+      <div class="pc"><div class="pc-img" id="pci-crem"><img src="Fotos/creme-antirrugas-capa.JPG" class="slide on" alt="Creme"><img src="Fotos/creme-antirrugas-segunda.JPG" class="slide" alt="Creme"><button class="ci-nav lft" onclick="ci('pci-crem',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-crem',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-crem',0)"></button><button class="ci-dot" onclick="ciGo('pci-crem',1)"></button></div></div><div class="pc-body"><div class="pc-cat">Creme antirrugas · 30g</div><div class="pc-nome">Creme Antirrugas Multicamadas</div><p class="pc-desc">Formulado para reverter os efeitos do envelhecimento. Atua em múltiplas camadas estimulando colágeno, elastina e firmeza.</p><div class="pc-usos"><span class="ut ug">Firmeza</span><span class="ut ug">Colágeno</span><span class="ut ud">Efeito botox</span></div><div class="pc-blk"><div class="pc-blk-lbl">Tecnologias</div><div class="pc-blk-txt">Epidermosil (ácido hialurônico bio-vetorizado) · WK Pep Erasin (peptídeo botox-like) · Plantcol (colágeno vegetal)</div></div><div class="pc-blk"><div class="pc-blk-lbl">Modo de uso</div><div class="pc-blk-txt">2x ao dia (manhã e noite) na pele limpa. Camada fina sobre rosto, pescoço e colo com movimentos circulares de baixo para cima.</div></div><div class="pc-ft"><span class="pc-vol">Resultados em 28 dias</span><a href="https://lemoritz.com.br/products/creme-antirrugas-multicamadas-le-moritz-2" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+      <!-- STICK HIDRATANTE -->
+      <div class="pc"><div class="pc-img" id="pci-hid"><img src="Fotos/stick-hidratante-capa.JPG" class="slide on" alt="Stick Hidratante"><img src="Fotos/stick-hidratante-segunda.JPG" class="slide" alt="Stick Hidratante"><button class="ci-nav lft" onclick="ci('pci-hid',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-hid',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-hid',0)"></button><button class="ci-dot" onclick="ciGo('pci-hid',1)"></button></div></div><div class="pc-body"><div class="pc-cat">Hidratante com FPS 50 · 6g</div><div class="pc-nome">Stick Hidratante FPS 50</div><p class="pc-desc">Hidratação intensa com proteção solar FPS 50 em um gesto. Toque seco, não interfere na maquiagem.</p><div class="pc-usos"><span class="ut ug">Hidratação</span><span class="ut ug">FPS 50</span><span class="ut ud">Prepara a pele</span></div><div class="pc-blk"><div class="pc-blk-lbl">Ativos</div><div class="pc-blk-txt">Ácido Hialurônico · Cera de Girassol · Óleo de Farelo de Arroz · Vitamina E · Filtros UV (Ethylhexyl Triazone, Bis Ethylhexyloxyphenol Methoxyphenyl Triazine)</div></div><div class="pc-blk"><div class="pc-blk-lbl">Modo de uso</div><div class="pc-blk-txt">Deslize diretamente nas áreas secas — rosto, lábios, pescoço e mãos. Pela manhã, use antes da maquiagem ou ao longo do dia conforme necessidade.</div></div><div class="pc-ft"><span class="pc-vol">~120 aplicações</span><a href="https://lemoritz.com.br/products/lemoritz-stick-hidratante" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+      <!-- RETINOL -->
+      <div class="pc"><div class="pc-img" id="pci-ret"><img src="Fotos/retinol-capa.JPG" class="slide on" alt="Stick Retinol"><img src="Fotos/retinol-segunda.JPG" class="slide" alt="Stick Retinol"><button class="ci-nav lft" onclick="ci('pci-ret',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-ret',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-ret',0)"></button><button class="ci-dot" onclick="ciGo('pci-ret',1)"></button></div></div><div class="pc-body"><div class="pc-cat">Tratamento noturno · 6g</div><div class="pc-nome">Stick Rejuvenescedor Noturno</div><p class="pc-desc">Tratamento noturno em stick. Renova a pele, estimula o colágeno e devolve luminosidade enquanto você dorme.</p><div class="pc-usos"><span class="ut ud">Anti-aging</span><span class="ut ug">Renova</span><span class="ut ug">Colágeno</span></div><div class="pc-blk"><div class="pc-blk-lbl">Ativos</div><div class="pc-blk-txt">Nano Retinol · Ácido Hialurônico · Retinol Like · Esqualano · Óleo de Rosa Mosqueta · Vitamina E</div></div><div class="pc-blk"><div class="pc-blk-lbl">Modo de uso</div><div class="pc-blk-txt">À noite, deslize sobre pele limpa e seca, evitando a área dos olhos e lábios. Inicie 1-2x por semana e aumente gradualmente. Use filtro solar durante o dia.</div></div><div class="pc-ft"><span class="pc-vol">~120 aplicações</span><a href="https://lemoritz.com.br/products/stick-rejuvenescedor-noturno-le-moritz" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+    </div>
+  </div>
+
+  <!-- ACESSÓRIOS -->
+  <div class="psec">
+    <div class="psec-lbl">👜 Acessórios</div>
+    <div class="pgrid">
+
+      <!-- PINCEL -->
+      <div class="pc"><div class="pc-img" id="pci-pin"><img src="Fotos/pincel-capa.jpg" class="slide on" alt="Pincel"><img src="Fotos/pincel-segunda.jpg" class="slide" alt="Pincel"><button class="ci-nav lft" onclick="ci('pci-pin',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-pin',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-pin',0)"></button><button class="ci-dot" onclick="ciGo('pci-pin',1)"></button></div></div><div class="pc-body"><div class="pc-cat">Acessório</div><div class="pc-nome">Pincel Le Moritz Multifuncional 9 em 1</div><p class="pc-desc">Pincel com 4 pontas e cerdas macias para aplicar, esfumar e definir os Sticks Le Moritz. Faz a make inteira sem precisar trocar de pincel.</p><div class="pc-usos"><span class="ut ud">Aplicação</span><span class="ut ud">Esfumado</span></div><div class="pc-ft"><span class="pc-vol">Pincel profissional</span><a href="https://lemoritz.com.br/collections/all" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+      <!-- NÉCESSAIRE -->
+      <div class="pc"><div class="pc-img" id="pci-nec"><img src="Fotos/necessaire-capa.jpg" class="slide on" alt="Necessaire"><img src="Fotos/necessaire-segunda.jpg" class="slide" alt="Necessaire"><button class="ci-nav lft" onclick="ci('pci-nec',-1)">‹</button><button class="ci-nav rgt" onclick="ci('pci-nec',1)">›</button><div class="ci-dots"><button class="ci-dot on" onclick="ciGo('pci-nec',0)"></button><button class="ci-dot" onclick="ciGo('pci-nec',1)"></button></div></div><div class="pc-body"><div class="pc-cat">Acessório</div><div class="pc-nome">Necessaire Le Moritz</div><p class="pc-desc">Necessaire exclusiva da Le Moritz para guardar e transportar seus produtos com estilo e organização.</p><div class="pc-usos"><span class="ut ud">Organização</span><span class="ut ud">Presente</span></div><div class="pc-ft"><span class="pc-vol">Edição limitada</span><a href="https://lemoritz.com.br/collections/all" target="_blank" class="pc-link">Ver no site ↗</a></div></div></div>
+
+    </div>
+  </div>
+</div></div>
+
+<!-- MODAL REFERÊNCIAS -->
+<div class="ref-modal" id="refModal" onclick="closeRefModal(event)">
+  <div class="ref-modal-box" id="refModalBox">
+    <button class="ref-modal-close" onclick="closeRefModal()">✕</button>
+    <div class="ref-modal-iframe-wrap">
+      <iframe id="refModalIframe" src="" frameborder="0" scrolling="no"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </div>
+    <div class="ref-modal-info">
+      <div class="ref-modal-cat" id="refModalCat"></div>
+      <div class="ref-modal-title" id="refModalTitle"></div>
+      <div class="ref-modal-desc" id="refModalDesc"></div>
+      <a id="refModalLink" href="#" target="_blank" class="ref-modal-link">Ver no Instagram ↗</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function go(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tab-'+id).classList.add('on');
+  const tabs=['home','desafios','vendas','refs','produtos'];
+  const i=tabs.indexOf(id);
+  if(i>=0) document.querySelectorAll('.nb')[i].classList.add('on');
+  window.scrollTo(0,0);
+}
+
+const virais=[
+  // SKINCARE
+  {t:"Segredo de beleza",d:"Substituir partes de procedimentos por cenas de você fazendo skincare.",u:"https://www.instagram.com/reel/DZGZ-OguVQ_/",e:"https://www.instagram.com/reel/DZGZ-OguVQ_/embed/",c:"skincare",f:"Trend"},
+  {t:"Não esqueça do pescoço!",d:"Formato divertido de alerta, trazendo o fato de que as pessoas tendem a cuidar só do rosto e deixam pescoço e colo de lado.",u:"https://www.instagram.com/reel/Cyi2Jp-Lpit/",e:"https://www.instagram.com/reel/Cyi2Jp-Lpit/embed/",c:"skincare",f:"Alerta"},
+  {t:"Rotina de skincare",d:"Demonstração de uso e apresentação de produtos inseridos na rotina de uma forma natural sempre funciona bem.",u:"https://www.instagram.com/reel/DWPd4yyD6BI/",e:"https://www.instagram.com/reel/DWPd4yyD6BI/embed/",c:"skincare",f:"Tutorial"},
+  // MAKE
+  {t:"Tutorial efeito lifting",d:"O formato de comparação é muito validado e possível de trazer de diferentes formas.",u:"https://www.instagram.com/p/DYphnU1jBoJ/",e:"https://www.instagram.com/p/DYphnU1jBoJ/embed/",c:"make",f:"Tutorial"},
+  {t:"Você sabia?",d:"Formato de compilado de truques. Além de fazer truques para o rosto todo, seria interessante para áreas específicas. Ex: Truques para pálpebra caída.",u:"https://www.instagram.com/reel/DXkOLyuEacM/",e:"https://www.instagram.com/reel/DXkOLyuEacM/embed/",c:"make",f:"Truques"},
+  {t:"+5 anos x -5 anos",d:"Vídeos comparativos de diferentes formas são uma ótima forma de ilustrar o que funciona e o que não funciona.",u:"https://www.instagram.com/reel/DZIVLHOR7O3/",e:"https://www.instagram.com/reel/DZIVLHOR7O3/embed/",c:"make",f:"Comparativo"},
+  // TENDÊNCIAS
+  {t:"Só pen
