@@ -578,4 +578,67 @@ const virais=[
   {t:"Você sabia?",d:"Formato de compilado de truques. Além de fazer truques para o rosto todo, seria interessante para áreas específicas. Ex: Truques para pálpebra caída.",u:"https://www.instagram.com/reel/DXkOLyuEacM/",e:"https://www.instagram.com/reel/DXkOLyuEacM/embed/",c:"make",f:"Truques"},
   {t:"+5 anos x -5 anos",d:"Vídeos comparativos de diferentes formas são uma ótima forma de ilustrar o que funciona e o que não funciona.",u:"https://www.instagram.com/reel/DZIVLHOR7O3/",e:"https://www.instagram.com/reel/DZIVLHOR7O3/embed/",c:"make",f:"Comparativo"},
   // TENDÊNCIAS
-  {t:"Só pen
+  {t:"Só penso nisso",d:"Trend super em alta, ainda dá tempo de pegar o gancho.",u:"https://www.instagram.com/reel/DY5Qub_P_6j/",e:"https://www.instagram.com/reel/DY5Qub_P_6j/embed/",c:"tendencias",f:"Trend"},
+  {t:"Nota de esclarecimento",d:"Esse estilo de gancho é muito bom! Gera curiosidade e as pessoas tendem a engajar.",u:"https://www.instagram.com/reel/DZbBGsIIXEq/",e:"https://www.instagram.com/reel/DZbBGsIIXEq/embed/",c:"tendencias",f:"Gancho"},
+];
+const tlab={skincare:'Skincare',make:'Make',tendencias:'Tendências'};
+const tbg={skincare:'linear-gradient(135deg,rgba(214,168,196,.6),rgba(158,104,153,.5))',make:'linear-gradient(135deg,rgba(186,136,174,.55),rgba(91,55,101,.4))',tendencias:'linear-gradient(135deg,rgba(158,104,153,.4),rgba(214,168,196,.55))'};
+function renderRefs(f='todos'){
+  const g=document.getElementById('rg');
+  const list=f==='todos'?virais:virais.filter(v=>v.c===f);
+  g.innerHTML=list.map((v,i)=>`
+    <div class="rc" onclick="openRefModal(${i},this)" data-idx="${i}">
+      <div class="rc-thumb">
+        <div class="rc-frame-bg"><iframe src="${v.e}" loading="lazy" frameborder="0" scrolling="no" allow="autoplay; encrypted-media"></iframe></div>
+        <span class="rc-plat">&#9679; Instagram</span>
+        <div class="rc-play">&#9654;</div>
+        <div class="rc-thumb-bottom">
+          ${v.f?`<span class="rc-thumb-format">${v.f}</span>`:''}
+          <p class="rc-thumb-title">${v.t}</p>
+        </div>
+      </div>
+      <div class="rc-body">
+        <div class="rc-tags"><span class="rtag ts">${tlab[v.c]}</span></div>
+        <p class="rc-desc">${v.d}</p>
+        <div class="rc-ft"><span class="rc-num">Ref ${i+1}</span><span class="rc-arr">&#9654;</span></div>
+      </div>
+    </div>`).join('');
+}
+function openRefModal(i, el){
+  const v=virais[el?parseInt(el.dataset.idx):i];
+  document.getElementById('refModalIframe').src=v.e;
+  document.getElementById('refModalCat').textContent=tlab[v.c];
+  document.getElementById('refModalTitle').textContent=v.t;
+  document.getElementById('refModalDesc').textContent=v.d;
+  document.getElementById('refModalLink').href=v.u;
+  document.getElementById('refModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeRefModal(e){
+  if(e&&e.target!==document.getElementById('refModal')&&e.target!==document.querySelector('.ref-modal-close'))return;
+  document.getElementById('refModal').classList.remove('open');
+  document.getElementById('refModalIframe').src='';
+  document.body.style.overflow='';
+}
+function ci(id,d){
+  const w=document.getElementById(id);
+  const sl=w.querySelectorAll('.slide'),dt=w.querySelectorAll('.ci-dot');
+  let c=[...sl].findIndex(s=>s.classList.contains('on'));
+  sl[c].classList.remove('on');dt[c].classList.remove('on');
+  c=(c+d+sl.length)%sl.length;
+  sl[c].classList.add('on');dt[c].classList.add('on');
+}
+function ciGo(id,i){
+  const w=document.getElementById(id);
+  const sl=w.querySelectorAll('.slide'),dt=w.querySelectorAll('.ci-dot');
+  sl.forEach((s,j)=>{s.classList.toggle('on',j===i);dt[j].classList.toggle('on',j===i);});
+}
+function filt(c,btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');renderRefs(c);
+}
+document.addEventListener('DOMContentLoaded',()=>renderRefs());
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeRefModal({target:document.getElementById('refModal')});});
+</script>
+</body>
+</html>
