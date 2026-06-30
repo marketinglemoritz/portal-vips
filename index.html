@@ -578,6 +578,13 @@ function go(id){
 }
 
 const virais=[
+  // TIKTOK SHOP
+  {t:"Lista de favoritos",d:"Formato de lista de favoritos e descoberta de produtos.",u:"https://www.tiktok.com/@thaisindica_/video/7654593933170806034",e:"",c:"tiktok",f:"Lista"},
+  {t:"Demonstração de produto",d:"Demonstração e benefícios do produto.",u:"https://www.tiktok.com/@herfitbeauty/video/7652345591489482014",e:"",c:"tiktok",f:"Demo"},
+  {t:"Prova de resultado",d:"Prova de resultado com demonstração de uso.",u:"https://www.tiktok.com/@silmaraxav/video/7653880353307790612",e:"",c:"tiktok",f:"Resultado"},
+  {t:"Foco nos benefícios",d:"Focar na demonstração e ao invés de falar do preço, falar dos benefícios, por exemplo: \"Eu nunca mais vou pagar caro em máscaras que só quebra e deixa os cílios ralos\".",u:"https://www.tiktok.com/@carolinaestevesmarques/video/7654656332779310356",e:"",c:"tiktok",f:"Benefícios"},
+  {t:"Dores mulheres 45+",d:"Bater em dores em comum das mulheres 45+ para chamar atenção.",u:"https://www.tiktok.com/@sa.dalmolin/video/7655430280479657237",e:"",c:"tiktok",f:"Gatilho"},
+  {t:"POV com produto na mão",d:"Formato de pov, com produto na mão.",u:"https://www.tiktok.com/@biancca.martins/video/7654587941079059733",e:"",c:"tiktok",f:"POV"},
   // INSTAGRAM
   {t:"Segredo de beleza",d:"Substituir partes de procedimentos por cenas de você fazendo skincare.",u:"https://www.instagram.com/reel/DZGZ-OguVQ_/",e:"https://www.instagram.com/reel/DZGZ-OguVQ_/embed/",c:"instagram",f:"Trend"},
   {t:"Não esqueça do pescoço!",d:"Formato divertido de alerta, trazendo o fato de que as pessoas tendem a cuidar só do rosto e deixam pescoço e colo de lado.",u:"https://www.instagram.com/reel/Cyi2Jp-Lpit/",e:"https://www.instagram.com/reel/Cyi2Jp-Lpit/embed/",c:"instagram",f:"Alerta"},
@@ -587,27 +594,21 @@ const virais=[
   {t:"+5 anos x -5 anos",d:"Vídeos comparativos de diferentes formas são uma ótima forma de ilustrar o que funciona e o que não funciona.",u:"https://www.instagram.com/reel/DZIVLHOR7O3/",e:"https://www.instagram.com/reel/DZIVLHOR7O3/embed/",c:"instagram",f:"Comparativo"},
   {t:"Só penso nisso",d:"Trend super em alta, ainda dá tempo de pegar o gancho.",u:"https://www.instagram.com/reel/DY5Qub_P_6j/",e:"https://www.instagram.com/reel/DY5Qub_P_6j/embed/",c:"instagram",f:"Trend"},
   {t:"Nota de esclarecimento",d:"Esse estilo de gancho é muito bom! Gera curiosidade e as pessoas tendem a engajar.",u:"https://www.instagram.com/reel/DZbBGsIIXEq/",e:"https://www.instagram.com/reel/DZbBGsIIXEq/embed/",c:"instagram",f:"Gancho"},
-  // TIKTOK SHOP
-  {t:"Lista de favoritos",d:"Formato de lista de favoritos e descoberta de produtos.",u:"https://www.tiktok.com/@thaisindica_/video/7654593933170806034",e:"",c:"tiktok",f:"Lista"},
-  {t:"Demonstração de produto",d:"Demonstração e benefícios do produto.",u:"https://www.tiktok.com/@herfitbeauty/video/7652345591489482014",e:"",c:"tiktok",f:"Demo"},
-  {t:"Prova de resultado",d:"Prova de resultado com demonstração de uso.",u:"https://www.tiktok.com/@silmaraxav/video/7653880353307790612",e:"",c:"tiktok",f:"Resultado"},
-  {t:"Foco nos benefícios",d:"Focar na demonstração e ao invés de falar do preço, falar dos benefícios, por exemplo: \"Eu nunca mais vou pagar caro em máscaras que só quebra e deixa os cílios ralos\".",u:"https://www.tiktok.com/@carolinaestevesmarques/video/7654656332779310356",e:"",c:"tiktok",f:"Benefícios"},
-  {t:"Dores mulheres 45+",d:"Bater em dores em comum das mulheres 45+ para chamar atenção.",u:"https://www.tiktok.com/@sa.dalmolin/video/7655430280479657237",e:"",c:"tiktok",f:"Gatilho"},
-  {t:"POV com produto na mão",d:"Formato de pov, com produto na mão.",u:"https://www.tiktok.com/@biancca.martins/video/7654587941079059733",e:"",c:"tiktok",f:"POV"},
 ];
 const tlab={instagram:'Instagram',tiktok:'TikTok Shop',skincare:'Skincare',make:'Make',tendencias:'Tendências'};
 const tbg={instagram:'linear-gradient(135deg,rgba(214,168,196,.6),rgba(158,104,153,.5))',tiktok:'linear-gradient(135deg,rgba(186,136,174,.55),rgba(91,55,101,.4))',skincare:'linear-gradient(135deg,rgba(214,168,196,.6),rgba(158,104,153,.5))',make:'linear-gradient(135deg,rgba(186,136,174,.55),rgba(91,55,101,.4))',tendencias:'linear-gradient(135deg,rgba(158,104,153,.4),rgba(214,168,196,.55))'};
 function renderRefs(f='todos'){
   const g=document.getElementById('rg');
   const list=f==='todos'?virais:virais.filter(v=>v.c===f);
-  g.innerHTML=list.map((v,i)=>{
+  g.innerHTML=list.map((v)=>{
+    const idx=virais.indexOf(v);
     const istt=v.c==='tiktok';
     const thumb=istt
-      ?`<div class="rc-tt-bg"><span class="rc-tt-icon">♪</span></div>`
+      ?`<div class="rc-tt-bg" id="ttbg-${idx}"><span class="rc-tt-icon">♪</span></div>`
       :`<div class="rc-frame-bg"><iframe src="${v.e}" loading="lazy" frameborder="0" scrolling="no" allow="autoplay; encrypted-media"></iframe></div>`;
     const plat=istt?'TikTok Shop':'Instagram';
     return `
-    <div class="rc" onclick="openRefModal(${i},this)" data-idx="${i}">
+    <div class="rc" onclick="openRefModal(${idx},this)" data-idx="${idx}">
       <div class="rc-thumb">
         ${thumb}
         <span class="rc-plat${istt?' rc-plat-tt':''}">&#9679; ${plat}</span>
@@ -618,10 +619,22 @@ function renderRefs(f='todos'){
       </div>
       <div class="rc-body">
         <p class="rc-desc">${v.d}</p>
-        <div class="rc-ft"><span class="rc-num">Ref ${i+1}</span><span class="rc-arr">&#9654;</span></div>
+        <div class="rc-ft"><span class="rc-arr">&#9654;</span></div>
       </div>
     </div>`;
   }).join('');
+  // Carrega thumbnails reais do TikTok via oEmbed
+  list.filter(v=>v.c==='tiktok').forEach(v=>{
+    const idx=virais.indexOf(v);
+    fetch(`https://www.tiktok.com/oembed?url=${encodeURIComponent(v.u)}`)
+      .then(r=>r.json())
+      .then(d=>{
+        if(!d.thumbnail_url)return;
+        const bg=document.getElementById('ttbg-'+idx);
+        if(bg){bg.style.cssText='position:absolute;inset:0;background:url('+d.thumbnail_url+') center/cover no-repeat;';
+          const ic=bg.querySelector('.rc-tt-icon');if(ic)ic.remove();}
+      }).catch(()=>{});
+  });
 }
 function openRefModal(i, el){
   const v=virais[el?parseInt(el.dataset.idx):i];
