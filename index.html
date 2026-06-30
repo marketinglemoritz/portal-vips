@@ -129,16 +129,23 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
 .pd-icon { font-size:38px; margin-bottom:14px; }
 .pd-title { font-family:'Playfair Display',Georgia,serif; font-size:26px; font-weight:700; margin-bottom:10px; }
 .pd-desc { font-size:14px; color:var(--muted); line-height:1.7; max-width:480px; margin:0 auto; }
-.desafios-anteriores { margin-top:8px; }
-.da-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
-.da-card { background:var(--glass); backdrop-filter:blur(20px); border:1px solid var(--glass-b); box-shadow:var(--glass-s); border-radius:20px; padding:24px 22px; position:relative; }
-.da-status { position:absolute; top:14px; right:16px; font-size:10px; font-weight:700; letter-spacing:.05em; padding:4px 10px; border-radius:100px; }
-.da-status.ok  { background:rgba(180,240,180,.4); color:#1a5a1a; }
-.da-status.enc { background:rgba(91,55,101,.12); color:var(--p1); }
-.da-card-num { font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
-.da-card h4 { font-size:16px; font-weight:700; margin-bottom:6px; }
-.da-card p { font-size:13px; color:var(--muted); line-height:1.55; }
-.da-card-ht { display:inline-block; font-size:12px; font-weight:700; color:var(--p1); margin-top:10px; background:rgba(91,55,101,.1); padding:4px 10px; border-radius:100px; }
+.desafio-ativo { border-radius:26px; padding:36px; margin-bottom:28px; }
+.dac-header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.dac-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(91,55,101,.15); color:var(--p1); font-size:11px; font-weight:800; letter-spacing:.05em; padding:5px 14px; border-radius:100px; }
+.dac-badge::before { content:'●'; font-size:7px; color:#4caf50; }
+.dac-periodo { font-size:12px; color:var(--muted); font-weight:500; background:rgba(91,55,101,.07); padding:4px 12px; border-radius:100px; }
+.dac-title { font-family:'Playfair Display',Georgia,serif; font-size:28px; font-weight:700; margin-bottom:10px; color:var(--text); }
+.dac-desc { font-size:14px; color:var(--muted); line-height:1.65; margin-bottom:26px; }
+.dac-prizes { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.dac-prize { border-radius:18px; padding:22px 16px; text-align:center; display:flex; flex-direction:column; gap:5px; }
+.dac-prize.gold   { background:linear-gradient(135deg,rgba(255,215,0,.22),rgba(255,185,0,.1)); border:1px solid rgba(220,170,0,.35); }
+.dac-prize.silver { background:linear-gradient(135deg,rgba(192,192,192,.25),rgba(160,160,160,.1)); border:1px solid rgba(180,180,180,.35); }
+.dac-prize.bronze { background:linear-gradient(135deg,rgba(205,127,50,.22),rgba(180,100,30,.1)); border:1px solid rgba(200,120,40,.32); }
+.dp-pos { font-size:18px; margin-bottom:2px; }
+.dp-lugar { font-size:11px; font-weight:700; color:var(--muted); letter-spacing:.04em; }
+.dp-val { font-size:28px; font-weight:800; color:var(--p1); letter-spacing:-.02em; line-height:1.1; }
+.dp-tipo { font-size:10px; color:var(--muted); font-weight:600; letter-spacing:.06em; text-transform:uppercase; }
+@media(max-width:600px){ .dac-prizes { grid-template-columns:1fr; } .desafio-ativo { padding:24px 18px; } }
 
 /* VENDAS */
 .vendas-split { display:grid; grid-template-columns:1fr 390px; gap:28px; align-items:start; }
@@ -175,6 +182,9 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
 .rc-frame-bg { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
 .rc-frame-bg iframe { width:100%; height:720px; border:none; display:block; margin-top:-44px; }
 .rc-plat { position:absolute; top:10px; right:10px; background:rgba(0,0,0,.45); backdrop-filter:blur(8px); color:rgba(255,255,255,.9); font-size:9px; font-weight:700; letter-spacing:.04em; padding:4px 9px; border-radius:100px; z-index:3; }
+.rc-tt-bg { position:absolute; inset:0; background:linear-gradient(135deg,#010101 0%,#1a0a0a 100%); display:flex; align-items:center; justify-content:center; pointer-events:none; }
+.rc-tt-icon { font-size:54px; opacity:.12; user-select:none; }
+.rc-plat-tt { background:rgba(0,0,0,.75)!important; }
 .rc-thumb-bottom { position:absolute; bottom:0; left:0; right:0; padding:14px; background:linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 100%); z-index:3; }
 .rc-thumb-format { display:inline-block; font-size:9px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; color:rgba(255,255,255,.82); background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); padding:3px 8px; border-radius:100px; width:fit-content; margin-bottom:7px; }
 .rc-thumb-title { font-family:'Playfair Display',Georgia,serif; font-size:14px; font-weight:700; color:white; line-height:1.25; text-shadow:0 1px 10px rgba(0,0,0,.5); }
@@ -303,39 +313,33 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
       <div class="hero-photo">
         <img src="Fotos/home.jpg" alt="Le Moritz VIPs" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,var(--p1),var(--p2))'">
         <div class="hero-overlay">
-          <span class="hero-pill">Portal ativo · Junho 2026</span>
+          <span class="hero-pill">Portal ativo · Julho 2026</span>
           <h1 class="hero-title">Olá,<br><em>VIPs Le Moritz</em> ✦</h1>
           <p class="hero-sub">Referências, produtos e métricas em um só lugar.</p>
         </div>
       </div>
       <div class="hero-right">
         <div class="hcard dk gd">
-          <span class="hcard-lbl">Próximos desafios</span>
-          <span class="hcard-val">Em breve</span>
-          <span class="hcard-sub">Aguarde novidades 💜</span>
+          <span class="hcard-lbl">🏆 Desafio de julho</span>
+          <span class="hcard-val">Ranking vendas</span>
+          <span class="hcard-sub">01/07 · 31/07 · PIX até R$1.000</span>
         </div>
         <div class="hcard lt g">
-          <span class="hcard-lbl">Novidade</span>
-          <span class="hcard-val">2 lançamentos</span>
-          <span class="hcard-sub">Rosa Mauve + Marrom Café</span>
+          <span class="hcard-lbl">Oferta do mês</span>
+          <span class="hcard-val">Kit 6 Sticks</span>
+          <span class="hcard-sub">R$882 → R$297 · 66% OFF</span>
         </div>
       </div>
     </div>
   </div>
 
   <p class="sec-lbl">📌 Mural</p>
-  <div class="mural-grid">
+  <div class="mural-grid" style="grid-template-columns:1fr">
     <div class="mcard mc1">
-      <span class="mcard-tag">Desafios</span>
-      <h3>Próximo desafio em breve</h3>
-      <p>Um novo desafio está sendo preparado. Você será avisada pelo WhatsApp assim que estiver disponível.</p>
-      <span class="mcard-date">Aguarde</span>
-    </div>
-    <div class="mcard mc2">
-      <span class="mcard-tag">Novidade</span>
-      <h3>Lançamento: novos Sticks</h3>
-      <p>O <strong>Stick Rosa Mauve</strong> e o <strong>Stick Marrom Café</strong> chegaram! Criem conteúdo dos lançamentos.</p>
-      <span class="mcard-date">09/06/2026</span>
+      <span class="mcard-tag">Desafio ativo 🏆</span>
+      <h3>Ranking de Vendas · Julho</h3>
+      <p>Quem mais vender em julho leva PIX. 1º lugar R$1.000 · 2º R$600 · 3º R$300. Válido até 31/07.</p>
+      <span class="mcard-date">01/07 → 31/07/2026</span>
     </div>
   </div>
 
@@ -350,34 +354,12 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
       <a href="https://lemoritz.com.br/products/kit-lifting-e-firmeza-para-olhos" target="_blank" class="oc-btn">Ver oferta ↗</a>
     </div>
     <div class="ocard">
-      <span class="oc-off">50% OFF</span>
-      <div class="oc-nome">Kit Rotina de Hidratação</div>
-      <div class="oc-prod">Mousse de Limpeza · Sérum Revitalizador de Olhos · Creme Antirrugas · Tônico Essência Hidratante</div>
-      <div class="oc-preco"><span class="oc-old">R$518</span><span class="oc-new">R$257</span></div>
-      <div class="oc-info">✓ Frete grátis acima de R$100 &nbsp;·&nbsp; ✓ 5% OFF no PIX</div>
-      <a href="https://lemoritz.com.br/products/kit-rotina-de-hidratacao-le-moritz" target="_blank" class="oc-btn">Ver oferta ↗</a>
-    </div>
-    <div class="ocard">
-      <span class="oc-off">Até 35% OFF</span>
-      <div class="oc-nome">Monte seu Kit</div>
-      <div class="oc-prod">Escolha os produtos que você mais gosta e economize mais conforme a quantidade</div>
-      <div class="oc-preco" style="display:block;">
-        <div style="font-size:12px; color:var(--muted); line-height:1.9;">
-          2 produtos → <strong style="color:var(--p1);">15% OFF</strong><br>
-          3 produtos → <strong style="color:var(--p1);">25% OFF</strong><br>
-          4+ produtos → <strong style="color:var(--p1);">35% OFF</strong>
-        </div>
-      </div>
+      <span class="oc-off">66% OFF</span>
+      <div class="oc-nome">Kit 6 Sticks de Cor</div>
+      <div class="oc-prod">6 Sticks de Cor Le Moritz para olhos, lábios e bochechas</div>
+      <div class="oc-preco"><span class="oc-old">R$882</span><span class="oc-new">R$297</span></div>
       <div class="oc-info">✓ Frete grátis &nbsp;·&nbsp; ✓ 5% OFF no PIX</div>
-      <a href="https://lemoritz.com.br/pages/monte-seu-kit" target="_blank" class="oc-btn">Montar kit ↗</a>
-    </div>
-    <div class="ocard">
-      <span class="oc-off">50% OFF</span>
-      <div class="oc-nome">Kit Pele Glow e Olhos Marcantes</div>
-      <div class="oc-prod">Stick Terracota · Stick Rosê · Stick Hidratante FPS 50 · Máscara Regenerativa + Pincel de brinde</div>
-      <div class="oc-preco"><span class="oc-old">R$588</span><span class="oc-new">R$297</span></div>
-      <div class="oc-info">✓ Pincel 9 em 1 de brinde &nbsp;·&nbsp; ✓ Frete grátis &nbsp;·&nbsp; ✓ 5% OFF no PIX</div>
-      <a href="https://lemoritz.com.br/products/kit-pele-glow-olhos-marcantes-le-moritz-coral-dourado" target="_blank" class="oc-btn">Ver oferta ↗</a>
+      <a href="https://lemoritz.com.br/products/kit-6-sticks-de-cor-le-moritz" target="_blank" class="oc-btn">Ver oferta ↗</a>
     </div>
   </div>
 
@@ -417,10 +399,33 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
     <p>Participe, crie conteúdo e acompanhe cada missão.</p>
   </div>
 
-  <div class="proximo-desafio g">
-    <div class="pd-icon">⏳</div>
-    <div class="pd-title">Próximo desafio em breve</div>
-    <p class="pd-desc">Um novo desafio está sendo preparado especialmente para vocês. Você será avisada pelo WhatsApp assim que estiver disponível.</p>
+  <div class="desafio-ativo g">
+    <div class="dac-header">
+      <span class="dac-badge">Desafio ativo</span>
+      <span class="dac-periodo">01/07 → 31/07/2026</span>
+    </div>
+    <div class="dac-title">Ranking de Vendas · Julho</div>
+    <p class="dac-desc">Quem mais vender usando o cupom em julho leva premiação em PIX. Acompanhe sua posição pelo dashboard de vendas — quanto mais você vender, maior o prêmio!</p>
+    <div class="dac-prizes">
+      <div class="dac-prize gold">
+        <span class="dp-pos">🥇</span>
+        <span class="dp-lugar">1º lugar</span>
+        <span class="dp-val">R$ 1.000</span>
+        <span class="dp-tipo">via PIX</span>
+      </div>
+      <div class="dac-prize silver">
+        <span class="dp-pos">🥈</span>
+        <span class="dp-lugar">2º lugar</span>
+        <span class="dp-val">R$ 600</span>
+        <span class="dp-tipo">via PIX</span>
+      </div>
+      <div class="dac-prize bronze">
+        <span class="dp-pos">🥉</span>
+        <span class="dp-lugar">3º lugar</span>
+        <span class="dp-val">R$ 300</span>
+        <span class="dp-tipo">via PIX</span>
+      </div>
+    </div>
   </div>
 
 
@@ -450,16 +455,14 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
 <!-- ═══ REFERÊNCIAS ═══ -->
 <div class="tab" id="tab-refs"><div class="wrap">
   <div class="refs-h">
-    <h2 class="refs-heading">Referências <em>Instagram</em></h2>
-    <p class="refs-sub">Reels em alta para inspirar seus conteúdos. Clique para acessar.</p>
-    <span class="date-badge">✦ Atualizado em 09 de junho de 2026</span>
+    <h2 class="refs-heading">Referências <em>de conteúdo</em></h2>
+    <p class="refs-sub">Vídeos em alta para inspirar seus conteúdos. Clique para acessar.</p>
   </div>
   <div class="filtros">
     <span class="fl">Filtrar por</span>
     <button class="fb on" onclick="filt('todos',this)">Todos</button>
-    <button class="fb" onclick="filt('skincare',this)">Skincare pele madura</button>
-    <button class="fb" onclick="filt('make',this)">Make pele madura</button>
-    <button class="fb" onclick="filt('tendencias',this)">Tendências gerais</button>
+    <button class="fb" onclick="filt('instagram',this)">Instagram</button>
+    <button class="fb" onclick="filt('tiktok',this)">TikTok Shop</button>
   </div>
   <hr class="div">
   <div class="refs-grid" id="rg"></div>
@@ -575,43 +578,54 @@ function go(id){
 }
 
 const virais=[
-  // SKINCARE
-  {t:"Segredo de beleza",d:"Substituir partes de procedimentos por cenas de você fazendo skincare.",u:"https://www.instagram.com/reel/DZGZ-OguVQ_/",e:"https://www.instagram.com/reel/DZGZ-OguVQ_/embed/",c:"skincare",f:"Trend"},
-  {t:"Não esqueça do pescoço!",d:"Formato divertido de alerta, trazendo o fato de que as pessoas tendem a cuidar só do rosto e deixam pescoço e colo de lado.",u:"https://www.instagram.com/reel/Cyi2Jp-Lpit/",e:"https://www.instagram.com/reel/Cyi2Jp-Lpit/embed/",c:"skincare",f:"Alerta"},
-  {t:"Rotina de skincare",d:"Demonstração de uso e apresentação de produtos inseridos na rotina de uma forma natural sempre funciona bem.",u:"https://www.instagram.com/reel/DWPd4yyD6BI/",e:"https://www.instagram.com/reel/DWPd4yyD6BI/embed/",c:"skincare",f:"Tutorial"},
-  // MAKE
-  {t:"Tutorial efeito lifting",d:"O formato de comparação é muito validado e possível de trazer de diferentes formas.",u:"https://www.instagram.com/p/DYphnU1jBoJ/",e:"https://www.instagram.com/p/DYphnU1jBoJ/embed/",c:"make",f:"Tutorial"},
-  {t:"Você sabia?",d:"Formato de compilado de truques. Além de fazer truques para o rosto todo, seria interessante para áreas específicas. Ex: Truques para pálpebra caída.",u:"https://www.instagram.com/reel/DXkOLyuEacM/",e:"https://www.instagram.com/reel/DXkOLyuEacM/embed/",c:"make",f:"Truques"},
-  {t:"+5 anos x -5 anos",d:"Vídeos comparativos de diferentes formas são uma ótima forma de ilustrar o que funciona e o que não funciona.",u:"https://www.instagram.com/reel/DZIVLHOR7O3/",e:"https://www.instagram.com/reel/DZIVLHOR7O3/embed/",c:"make",f:"Comparativo"},
-  // TENDÊNCIAS
-  {t:"Só penso nisso",d:"Trend super em alta, ainda dá tempo de pegar o gancho.",u:"https://www.instagram.com/reel/DY5Qub_P_6j/",e:"https://www.instagram.com/reel/DY5Qub_P_6j/embed/",c:"tendencias",f:"Trend"},
-  {t:"Nota de esclarecimento",d:"Esse estilo de gancho é muito bom! Gera curiosidade e as pessoas tendem a engajar.",u:"https://www.instagram.com/reel/DZbBGsIIXEq/",e:"https://www.instagram.com/reel/DZbBGsIIXEq/embed/",c:"tendencias",f:"Gancho"},
+  // INSTAGRAM
+  {t:"Segredo de beleza",d:"Substituir partes de procedimentos por cenas de você fazendo skincare.",u:"https://www.instagram.com/reel/DZGZ-OguVQ_/",e:"https://www.instagram.com/reel/DZGZ-OguVQ_/embed/",c:"instagram",f:"Trend"},
+  {t:"Não esqueça do pescoço!",d:"Formato divertido de alerta, trazendo o fato de que as pessoas tendem a cuidar só do rosto e deixam pescoço e colo de lado.",u:"https://www.instagram.com/reel/Cyi2Jp-Lpit/",e:"https://www.instagram.com/reel/Cyi2Jp-Lpit/embed/",c:"instagram",f:"Alerta"},
+  {t:"Rotina de skincare",d:"Demonstração de uso e apresentação de produtos inseridos na rotina de uma forma natural sempre funciona bem.",u:"https://www.instagram.com/reel/DWPd4yyD6BI/",e:"https://www.instagram.com/reel/DWPd4yyD6BI/embed/",c:"instagram",f:"Tutorial"},
+  {t:"Tutorial efeito lifting",d:"O formato de comparação é muito validado e possível de trazer de diferentes formas.",u:"https://www.instagram.com/p/DYphnU1jBoJ/",e:"https://www.instagram.com/p/DYphnU1jBoJ/embed/",c:"instagram",f:"Tutorial"},
+  {t:"Você sabia?",d:"Formato de compilado de truques. Além de fazer truques para o rosto todo, seria interessante para áreas específicas. Ex: Truques para pálpebra caída.",u:"https://www.instagram.com/reel/DXkOLyuEacM/",e:"https://www.instagram.com/reel/DXkOLyuEacM/embed/",c:"instagram",f:"Truques"},
+  {t:"+5 anos x -5 anos",d:"Vídeos comparativos de diferentes formas são uma ótima forma de ilustrar o que funciona e o que não funciona.",u:"https://www.instagram.com/reel/DZIVLHOR7O3/",e:"https://www.instagram.com/reel/DZIVLHOR7O3/embed/",c:"instagram",f:"Comparativo"},
+  {t:"Só penso nisso",d:"Trend super em alta, ainda dá tempo de pegar o gancho.",u:"https://www.instagram.com/reel/DY5Qub_P_6j/",e:"https://www.instagram.com/reel/DY5Qub_P_6j/embed/",c:"instagram",f:"Trend"},
+  {t:"Nota de esclarecimento",d:"Esse estilo de gancho é muito bom! Gera curiosidade e as pessoas tendem a engajar.",u:"https://www.instagram.com/reel/DZbBGsIIXEq/",e:"https://www.instagram.com/reel/DZbBGsIIXEq/embed/",c:"instagram",f:"Gancho"},
+  // TIKTOK SHOP
+  {t:"Lista de favoritos",d:"Formato de lista de favoritos e descoberta de produtos.",u:"https://www.tiktok.com/@thaisindica_/video/7654593933170806034",e:"",c:"tiktok",f:"Lista"},
+  {t:"Demonstração de produto",d:"Demonstração e benefícios do produto.",u:"https://www.tiktok.com/@herfitbeauty/video/7652345591489482014",e:"",c:"tiktok",f:"Demo"},
+  {t:"Prova de resultado",d:"Prova de resultado com demonstração de uso.",u:"https://www.tiktok.com/@silmaraxav/video/7653880353307790612",e:"",c:"tiktok",f:"Resultado"},
+  {t:"Foco nos benefícios",d:"Focar na demonstração e ao invés de falar do preço, falar dos benefícios, por exemplo: \"Eu nunca mais vou pagar caro em máscaras que só quebra e deixa os cílios ralos\".",u:"https://www.tiktok.com/@carolinaestevesmarques/video/7654656332779310356",e:"",c:"tiktok",f:"Benefícios"},
+  {t:"Dores mulheres 45+",d:"Bater em dores em comum das mulheres 45+ para chamar atenção.",u:"https://www.tiktok.com/@sa.dalmolin/video/7655430280479657237",e:"",c:"tiktok",f:"Gatilho"},
+  {t:"POV com produto na mão",d:"Formato de pov, com produto na mão.",u:"https://www.tiktok.com/@biancca.martins/video/7654587941079059733",e:"",c:"tiktok",f:"POV"},
 ];
-const tlab={skincare:'Skincare',make:'Make',tendencias:'Tendências'};
-const tbg={skincare:'linear-gradient(135deg,rgba(214,168,196,.6),rgba(158,104,153,.5))',make:'linear-gradient(135deg,rgba(186,136,174,.55),rgba(91,55,101,.4))',tendencias:'linear-gradient(135deg,rgba(158,104,153,.4),rgba(214,168,196,.55))'};
+const tlab={instagram:'Instagram',tiktok:'TikTok Shop',skincare:'Skincare',make:'Make',tendencias:'Tendências'};
+const tbg={instagram:'linear-gradient(135deg,rgba(214,168,196,.6),rgba(158,104,153,.5))',tiktok:'linear-gradient(135deg,rgba(186,136,174,.55),rgba(91,55,101,.4))',skincare:'linear-gradient(135deg,rgba(214,168,196,.6),rgba(158,104,153,.5))',make:'linear-gradient(135deg,rgba(186,136,174,.55),rgba(91,55,101,.4))',tendencias:'linear-gradient(135deg,rgba(158,104,153,.4),rgba(214,168,196,.55))'};
 function renderRefs(f='todos'){
   const g=document.getElementById('rg');
   const list=f==='todos'?virais:virais.filter(v=>v.c===f);
-  g.innerHTML=list.map((v,i)=>`
+  g.innerHTML=list.map((v,i)=>{
+    const istt=v.c==='tiktok';
+    const thumb=istt
+      ?`<div class="rc-tt-bg"><span class="rc-tt-icon">♪</span></div>`
+      :`<div class="rc-frame-bg"><iframe src="${v.e}" loading="lazy" frameborder="0" scrolling="no" allow="autoplay; encrypted-media"></iframe></div>`;
+    const plat=istt?'TikTok Shop':'Instagram';
+    return `
     <div class="rc" onclick="openRefModal(${i},this)" data-idx="${i}">
       <div class="rc-thumb">
-        <div class="rc-frame-bg"><iframe src="${v.e}" loading="lazy" frameborder="0" scrolling="no" allow="autoplay; encrypted-media"></iframe></div>
-        <span class="rc-plat">&#9679; Instagram</span>
+        ${thumb}
+        <span class="rc-plat${istt?' rc-plat-tt':''}">&#9679; ${plat}</span>
         <div class="rc-play">&#9654;</div>
         <div class="rc-thumb-bottom">
           ${v.f?`<span class="rc-thumb-format">${v.f}</span>`:''}
-          <p class="rc-thumb-title">${v.t}</p>
         </div>
       </div>
       <div class="rc-body">
-        <div class="rc-tags"><span class="rtag ts">${tlab[v.c]}</span></div>
         <p class="rc-desc">${v.d}</p>
         <div class="rc-ft"><span class="rc-num">Ref ${i+1}</span><span class="rc-arr">&#9654;</span></div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 function openRefModal(i, el){
   const v=virais[el?parseInt(el.dataset.idx):i];
+  if(v.c==='tiktok'){window.open(v.u,'_blank');return;}
   document.getElementById('refModalIframe').src=v.e;
   document.getElementById('refModalCat').textContent=tlab[v.c];
   document.getElementById('refModalTitle').textContent=v.t;
