@@ -579,12 +579,12 @@ function go(id){
 
 const virais=[
   // TIKTOK SHOP
-  {t:"Lista de favoritos",d:"Formato de lista de favoritos e descoberta de produtos.",u:"https://www.tiktok.com/@thaisindica_/video/7654593933170806034",e:"",c:"tiktok",f:"Lista"},
-  {t:"Demonstração de produto",d:"Demonstração e benefícios do produto.",u:"https://www.tiktok.com/@herfitbeauty/video/7652345591489482014",e:"",c:"tiktok",f:"Demo"},
-  {t:"Prova de resultado",d:"Prova de resultado com demonstração de uso.",u:"https://www.tiktok.com/@silmaraxav/video/7653880353307790612",e:"",c:"tiktok",f:"Resultado"},
-  {t:"Foco nos benefícios",d:"Focar na demonstração e ao invés de falar do preço, falar dos benefícios, por exemplo: \"Eu nunca mais vou pagar caro em máscaras que só quebra e deixa os cílios ralos\".",u:"https://www.tiktok.com/@carolinaestevesmarques/video/7654656332779310356",e:"",c:"tiktok",f:"Benefícios"},
-  {t:"Dores mulheres 45+",d:"Bater em dores em comum das mulheres 45+ para chamar atenção.",u:"https://www.tiktok.com/@sa.dalmolin/video/7655430280479657237",e:"",c:"tiktok",f:"Gatilho"},
-  {t:"POV com produto na mão",d:"Formato de pov, com produto na mão.",u:"https://www.tiktok.com/@biancca.martins/video/7654587941079059733",e:"",c:"tiktok",f:"POV"},
+  {t:"O melhor conselho",d:"Esse começo de \"O melhor conselho que já recebi\" seguido de prova, mostrando os cílios antes de começar.",u:"https://www.tiktok.com/@katiefindsmoredeals/video/7656879974804098334",e:"",c:"tiktok",f:"Conselho"},
+  {t:"Demo ininterrupta",d:"Demonstração ininterrupta. Vejam como ela não corta o vídeo em momento algum. Dá pra acelerar, colocar cronômetro e usar elementos que provem quão rápido e eficiente é o efeito.",u:"https://www.tiktok.com/@itswalterhops/video/7659814627026472223",e:"",c:"tiktok",f:"Demo"},
+  {t:"Simples e direto",d:"Vídeo mais simples, mostrando como o produto fica e falando dos benefícios e funcionalidade.",u:"https://www.tiktok.com/@smittyyyyyyy1/video/7659914438564252958",e:"",c:"tiktok",f:"Produto"},
+  {t:"Foto do problema",d:"Esse formato de início com uma foto do problema por cima do vídeo tem funcionado bastante. Dá pra abordar com rugas, linhas finas, bolsinha nos olhos e o que mais sentirem que chame atenção.",u:"https://www.tiktok.com/@ugcglauciabrasil/video/7657035553099074836",e:"",c:"tiktok",f:"Foto Problema"},
+  {t:"Problema x Solução",d:"Demonstração de uso pura com narrativa de problema x solução.",u:"https://www.tiktok.com/@roseanacampos5/video/7639718890322267412",e:"",c:"tiktok",f:"Demo"},
+  {t:"A vozinha",d:"Esse formato de vídeo está dando muito bom, que é a famosa vozinha. A ideia é imitar um \"mimimi\". Daria pra fazer algo como \"Ah, mas eu já tentei de tudo pra acabar com x!\", e seguir por problema x solução.",u:"https://www.tiktok.com/@eblaskincare/video/7661014759868828948",e:"",c:"tiktok",f:"Vozinha"},
   // INSTAGRAM
   {t:"Segredo de beleza",d:"Substituir partes de procedimentos por cenas de você fazendo skincare.",u:"https://www.instagram.com/reel/DZGZ-OguVQ_/",e:"https://www.instagram.com/reel/DZGZ-OguVQ_/embed/",c:"instagram",f:"Trend"},
   {t:"Não esqueça do pescoço!",d:"Formato divertido de alerta, trazendo o fato de que as pessoas tendem a cuidar só do rosto e deixam pescoço e colo de lado.",u:"https://www.instagram.com/reel/Cyi2Jp-Lpit/",e:"https://www.instagram.com/reel/Cyi2Jp-Lpit/embed/",c:"instagram",f:"Alerta"},
@@ -608,7 +608,7 @@ function renderRefs(f='todos'){
       :`<div class="rc-frame-bg"><iframe src="${v.e}" loading="lazy" frameborder="0" scrolling="no" allow="autoplay; encrypted-media"></iframe></div>`;
     const plat=istt?'TikTok Shop':'Instagram';
     return `
-    <div class="rc" onclick="openRefModal(${idx},this)" data-idx="${idx}">
+    <div class="rc" onclick="openRefModal(${idx})" data-idx="${idx}">
       <div class="rc-thumb">
         ${thumb}
         <span class="rc-plat${istt?' rc-plat-tt':''}">&#9679; ${plat}</span>
@@ -636,8 +636,8 @@ function renderRefs(f='todos'){
       }).catch(()=>{});
   });
 }
-function openRefModal(i, el){
-  const v=virais[el?parseInt(el.dataset.idx):i];
+function openRefModal(i){
+  const v=virais[i];
   if(v.c==='tiktok'){window.open(v.u,'_blank');return;}
   document.getElementById('refModalIframe').src=v.e;
   document.getElementById('refModalCat').textContent=tlab[v.c];
