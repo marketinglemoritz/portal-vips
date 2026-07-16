@@ -146,6 +146,13 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
 .dp-val { font-size:28px; font-weight:800; color:var(--p1); letter-spacing:-.02em; line-height:1.1; }
 .dp-tipo { font-size:10px; color:var(--muted); font-weight:600; letter-spacing:.06em; text-transform:uppercase; }
 @media(max-width:600px){ .dac-prizes { grid-template-columns:1fr; } .desafio-ativo { padding:24px 18px; } }
+.dac-ranking { margin-top:22px; }
+.dac-ranking-lbl { font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+.dac-ranking-list { display:flex; flex-direction:column; gap:8px; }
+.dac-rank-item { display:flex; align-items:center; gap:14px; background:rgba(255,255,255,.45); border:1px solid rgba(255,255,255,.7); border-radius:14px; padding:12px 16px; }
+.dac-rank-medal { font-size:20px; flex-shrink:0; }
+.dac-rank-pos { font-size:11px; font-weight:700; color:var(--muted); width:52px; flex-shrink:0; }
+.dac-rank-name { font-size:14px; font-weight:700; color:var(--text); flex:1; }
 
 /* VENDAS */
 .vendas-split { display:grid; grid-template-columns:1fr 390px; gap:28px; align-items:start; }
@@ -424,6 +431,26 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
         <span class="dp-lugar">3º lugar</span>
         <span class="dp-val">R$ 300</span>
         <span class="dp-tipo">via PIX</span>
+      </div>
+    </div>
+    <div class="dac-ranking">
+      <p class="dac-ranking-lbl">📊 Colocação atual</p>
+      <div class="dac-ranking-list">
+        <div class="dac-rank-item">
+          <span class="dac-rank-medal">🥇</span>
+          <span class="dac-rank-pos">1º lugar</span>
+          <span class="dac-rank-name">Adriana Beatriz</span>
+        </div>
+        <div class="dac-rank-item">
+          <span class="dac-rank-medal">🥈</span>
+          <span class="dac-rank-pos">2º lugar</span>
+          <span class="dac-rank-name">Andrea Melo</span>
+        </div>
+        <div class="dac-rank-item">
+          <span class="dac-rank-medal">🥉</span>
+          <span class="dac-rank-pos">3º lugar</span>
+          <span class="dac-rank-name">Andreia Deia</span>
+        </div>
       </div>
     </div>
   </div>
