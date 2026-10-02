@@ -189,8 +189,8 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
 .rc-frame-bg { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
 .rc-frame-bg iframe { width:100%; height:720px; border:none; display:block; margin-top:-44px; }
 .rc-plat { position:absolute; top:10px; right:10px; background:rgba(0,0,0,.45); backdrop-filter:blur(8px); color:rgba(255,255,255,.9); font-size:9px; font-weight:700; letter-spacing:.04em; padding:4px 9px; border-radius:100px; z-index:3; }
-.rc-tt-bg { position:absolute; inset:0; background:linear-gradient(135deg,#010101 0%,#1a0a0a 100%); display:flex; align-items:center; justify-content:center; pointer-events:none; }
-.rc-tt-icon { font-size:54px; opacity:.12; user-select:none; }
+.rc-tt-bg { position:absolute; inset:0; background:linear-gradient(150deg,#5B3765 0%,#9E6899 55%,#D6A8C4 100%); display:flex; align-items:center; justify-content:center; pointer-events:none; }
+.rc-tt-icon { font-size:54px; opacity:.28; color:#fff; user-select:none; }
 .rc-plat-tt { background:rgba(0,0,0,.75)!important; }
 .rc-thumb-bottom { position:absolute; bottom:0; left:0; right:0; padding:14px; background:linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 100%); z-index:3; }
 .rc-thumb-format { display:inline-block; font-size:9px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; color:rgba(255,255,255,.82); background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); padding:3px 8px; border-radius:100px; width:fit-content; margin-bottom:7px; }
@@ -458,6 +458,13 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
   </div>
   <hr class="div">
   <div class="refs-grid" id="rg"></div>
+
+  <div class="refs-h" style="margin-top:56px">
+    <h2 class="refs-heading">Lançamento · <em>Stick de Pés</em></h2>
+    <p class="refs-sub">Referências dos briefings, organizadas pelo ângulo de narrativa. A nota em cada card diz o que observar naquele vídeo.</p>
+  </div>
+  <hr class="div">
+  <div class="refs-grid" id="rgpes"></div>
 </div></div>
 
 <!-- ═══ PRODUTOS ═══ -->
@@ -587,37 +594,68 @@ const virais=[
   {t:"Só penso nisso",d:"Trend super em alta, ainda dá tempo de pegar o gancho.",u:"https://www.instagram.com/reel/DY5Qub_P_6j/",e:"https://www.instagram.com/reel/DY5Qub_P_6j/embed/",c:"instagram",f:"Trend"},
   {t:"Nota de esclarecimento",d:"Esse estilo de gancho é muito bom! Gera curiosidade e as pessoas tendem a engajar.",u:"https://www.instagram.com/reel/DZbBGsIIXEq/",e:"https://www.instagram.com/reel/DZbBGsIIXEq/embed/",c:"instagram",f:"Gancho"},
 ];
+const pes=[
+  {t:"Antes e depois em close",d:"Prova a transformação visualmente: antes e depois com bastante close no resultado. É assim que a gente quer provar o antes e depois.",u:"https://www.instagram.com/p/DV7WuFhjhjk/",e:"https://www.instagram.com/p/DV7WuFhjhjk/embed/",c:"instagram",f:"Transformação"},
+  {t:"A estrutura inteira",d:"Repare na estrutura do vídeo do começo ao fim. É o esqueleto que funciona para o formato de 30 dias.",u:"https://www.instagram.com/p/DXxBGtrvdi5/",e:"https://www.instagram.com/p/DXxBGtrvdi5/embed/",c:"instagram",f:"Transformação"},
+  {t:"Benefícios sem parecer anúncio",d:"Veja como ela apresenta os benefícios encaixados no meio da demonstração, sem soar propaganda.",u:"https://www.tiktok.com/@giovannacali/video/7304020874317909254",e:"",c:"tiktok",f:"Transformação"},
+  {t:"Narrativa de evolução",d:"Cenas e narrativa de transformação ao longo do tempo. Boa referência de como mostrar a evolução dia após dia.",u:"https://www.tiktok.com/@renatamullerferreira/video/7194969953924025605",e:"",c:"tiktok",f:"Transformação"},
+  {t:"Banco de cenas em POV",d:"Cenas em POV que dá pra reproduzir direto. Repare nos ângulos de cada uma.",u:"https://www.tiktok.com/@naturally.yasmeen/video/7593799519700110647",e:"",c:"tiktok",f:"Transformação"},
+  {t:"Aplicação em POV",d:"Cenas de aplicação em POV. Essa serve para os três ângulos de narrativa.",u:"https://www.tiktok.com/@millennialhomebody/video/7554385801186938126",e:"",c:"tiktok",f:"Aplicação"},
+  {t:"Tentei de tudo",d:"A narrativa de “tentei de tudo e só isso funcionou”. Boa para a parte de comparação com outras soluções.",u:"https://www.tiktok.com/@dailyanacnd/video/7573334391401843986",e:"",c:"tiktok",f:"Problema-solução"},
+  {t:"Cenas do problema",d:"Boas cenas mostrando o problema. Também funciona como referência de rotina.",u:"https://www.tiktok.com/@poopiblh/video/7660914653169454369",e:"",c:"tiktok",f:"Problema-solução"},
+  {t:"Aplicação, narrativa e estrutura",d:"As três coisas juntas: cenas de aplicação, a narrativa e a estrutura do vídeo.",u:"https://www.tiktok.com/@cabelao.em.foco/video/7404552990159375621",e:"",c:"tiktok",f:"Problema-solução"},
+  {t:"Problema logo nos primeiros segundos",d:"Cena de problema em close já na abertura. É o que prende nos 3 primeiros segundos.",u:"https://www.tiktok.com/@huyanabeauty/video/7613402815330880790",e:"",c:"tiktok",f:"Problema-solução"},
+  {t:"Gancho inicial forte",d:"Estrutura do vídeo e, principalmente, o gancho inicial.",u:"https://www.tiktok.com/@mayaya.kimmm/video/7676819975985810709",e:"",c:"tiktok",f:"Problema-solução"},
+  {t:"Narrativa com aplicação",d:"Narrativa conduzida junto com as cenas de aplicação.",u:"https://www.tiktok.com/@ofcalinedp/video/7462912912890416390",e:"",c:"tiktok",f:"Problema-solução"},
+  {t:"Problema em close",d:"Cena de problema em close. Repare no enquadramento.",u:"https://www.instagram.com/p/Da-T8Brs_qh/",e:"https://www.instagram.com/p/Da-T8Brs_qh/embed/",c:"instagram",f:"Problema-solução"},
+  {t:"Ângulo, antes e depois, luz",d:"Repare nos ângulos de câmera, na construção do antes e depois e na iluminação. É o cuidado com a luz que faz o close no pé funcionar.",u:"https://www.tiktok.com/@kitsch/video/7161821884504411434",e:"",c:"tiktok",f:"Problema-solução"},
+  {t:"Luz e enquadramento",d:"Também aqui: ângulos, antes e depois e iluminação. Observe como a luz muda o que dá pra enxergar na pele.",u:"https://www.instagram.com/p/DY7R88UNCPT/",e:"https://www.instagram.com/p/DY7R88UNCPT/embed/",c:"instagram",f:"Problema-solução"},
+  {t:"Prova social na narrativa",d:"Narrativa com prova social. Repare no jeito que ela conta como conquistou o calcanhar dos sonhos — é esse caminho de história que funciona.",u:"https://www.tiktok.com/@gippierro/video/7447548191047716102",e:"",c:"tiktok",f:"Problema-solução"},
+  {t:"Aplicação resolvendo o problema",d:"Aplicação do produto e a solução do problema na sequência. Observe como ela amarra uma coisa na outra.",u:"https://www.instagram.com/p/DNlE1DVSRKv/",e:"https://www.instagram.com/p/DNlE1DVSRKv/embed/",c:"instagram",f:"Problema-solução"},
+  {t:"Cenas bonitas de cuidado",d:"Cenas bonitas com narrativa de cuidado. O tom que a gente quer no ângulo de rotina.",u:"https://www.tiktok.com/@xarabeq/video/7649058483727305997",e:"",c:"tiktok",f:"Rotina / POV"},
+  {t:"Rotina com cenas bonitas",d:"Rotina bem filmada. Repare na qualidade das cenas.",u:"https://www.tiktok.com/@jemaialzonia/video/7685813450831891726",e:"",c:"tiktok",f:"Rotina / POV"},
+  {t:"Gancho, cenas e tutorial",d:"Gancho inicial, cenas bonitas e o tutorial, tudo no mesmo vídeo.",u:"https://www.tiktok.com/@sallymulaan/video/7634256289165741334",e:"",c:"tiktok",f:"Rotina / POV"},
+  {t:"Formato e cenas",d:"Formato do vídeo e as cenas escolhidas.",u:"https://www.tiktok.com/@jemaialzonia/video/7667591272802159885",e:"",c:"tiktok",f:"Rotina / POV"},
+  {t:"Cenas de aplicação",d:"Cenas de aplicação do produto.",u:"https://www.instagram.com/p/DcNhaqJvm5s/",e:"https://www.instagram.com/p/DcNhaqJvm5s/embed/",c:"instagram",f:"Rotina / POV"},
+  {t:"Spá dos pés em casa",d:"Rotina em formato de spá dos pés em casa.",u:"https://www.tiktok.com/@byesterlima/video/7620567699676089620",e:"",c:"tiktok",f:"Rotina / POV"},
+  {t:"Tutorial de pés bonitos",d:"Tutorial para chegar no resultado desejado.",u:"https://www.tiktok.com/@candy.dulcedulce/video/7628407217787702548",e:"",c:"tiktok",f:"Rotina / POV"},
+  {t:"Ângulo que chama atenção",d:"Tutorial filmado de um ângulo diferente, que chama atenção.",u:"https://www.tiktok.com/@mindaylee_/video/7617870441557855495",e:"",c:"tiktok",f:"Rotina / POV"},
+  {t:"Tutorial em POV",d:"Tutorial de pés bonitos gravado em POV.",u:"https://www.tiktok.com/@melbellee_2/video/7521194929805118733",e:"",c:"tiktok",f:"Rotina / POV"},
+  {t:"Abertura com aplicação",d:"Cena inicial de aplicação com o pé já bonito.",u:"https://www.tiktok.com/@beautyinitself/video/7514802811574439198",e:"",c:"tiktok",f:"Rotina / POV"},
+  {t:"Ângulo bonito de aplicação",d:"Ângulo bonito na hora da aplicação.",u:"https://www.instagram.com/reels/DXHr7szDp3Y/",e:"https://www.instagram.com/reel/DXHr7szDp3Y/embed/",c:"instagram",f:"Rotina / POV"},
+  {t:"Produto com prova social",d:"Mostra o produto com prova social. Repare no jeito de falar e em como ela aparece resolvendo o problema.",u:"https://www.tiktok.com/@poopiblh/video/7219246299743341851",e:"",c:"tiktok",f:"Rotina / POV"},
+  {t:"Luz, ângulo e produto",d:"Iluminação e ângulo bem resolvidos, boas cenas e o produto bem apresentado.",u:"https://www.tiktok.com/@jemaialzonia/video/7627331057305668877",e:"",c:"tiktok",f:"Rotina / POV"},
+];
+const todasRefs=virais.concat(pes);
+
 const tlab={instagram:'Instagram',tiktok:'TikTok Shop',skincare:'Skincare',make:'Make',tendencias:'Tendências'};
 const tbg={instagram:'linear-gradient(135deg,rgba(214,168,196,.6),rgba(158,104,153,.5))',tiktok:'linear-gradient(135deg,rgba(186,136,174,.55),rgba(91,55,101,.4))',skincare:'linear-gradient(135deg,rgba(214,168,196,.6),rgba(158,104,153,.5))',make:'linear-gradient(135deg,rgba(186,136,174,.55),rgba(91,55,101,.4))',tendencias:'linear-gradient(135deg,rgba(158,104,153,.4),rgba(214,168,196,.55))'};
-function renderRefs(f='todos'){
-  const g=document.getElementById('rg');
-  const list=f==='todos'?virais:virais.filter(v=>v.c===f);
-  g.innerHTML=list.map((v)=>{
-    const idx=virais.indexOf(v);
-    const istt=v.c==='tiktok';
-    const thumb=istt
-      ?`<div class="rc-tt-bg" id="ttbg-${idx}"><span class="rc-tt-icon">♪</span></div>`
-      :`<div class="rc-frame-bg"><iframe src="${v.e}" loading="lazy" frameborder="0" scrolling="no" allow="autoplay; encrypted-media"></iframe></div>`;
-    const plat=istt?'TikTok Shop':'Instagram';
-    return `
-    <div class="rc" onclick="openRefModal(${idx})" data-idx="${idx}">
-      <div class="rc-thumb">
-        ${thumb}
-        <span class="rc-plat${istt?' rc-plat-tt':''}">&#9679; ${plat}</span>
-        <div class="rc-play">&#9654;</div>
-        <div class="rc-thumb-bottom">
-          ${v.f?`<span class="rc-thumb-format">${v.f}</span>`:''}
-        </div>
+function cardRef(v){
+  const idx=todasRefs.indexOf(v);
+  const istt=v.c==='tiktok';
+  const thumb=istt
+    ?`<div class="rc-tt-bg" id="ttbg-${idx}"><span class="rc-tt-icon">&#9834;</span></div>`
+    :`<div class="rc-frame-bg"><iframe src="${v.e}" loading="lazy" frameborder="0" scrolling="no" allow="autoplay; encrypted-media"></iframe></div>`;
+  const plat=istt?'TikTok Shop':'Instagram';
+  return `
+  <div class="rc" onclick="openRefModal(${idx})" data-idx="${idx}">
+    <div class="rc-thumb">
+      ${thumb}
+      <span class="rc-plat${istt?' rc-plat-tt':''}">&#9679; ${plat}</span>
+      <div class="rc-play">&#9654;</div>
+      <div class="rc-thumb-bottom">
+        ${v.f?`<span class="rc-thumb-format">${v.f}</span>`:''}
       </div>
-      <div class="rc-body">
-        <p class="rc-desc">${v.d}</p>
-        <div class="rc-ft"><span class="rc-arr">&#9654;</span></div>
-      </div>
-    </div>`;
-  }).join('');
-  // Carrega thumbnails reais do TikTok via oEmbed
+    </div>
+    <div class="rc-body">
+      <p class="rc-desc">${v.d}</p>
+      <div class="rc-ft"><span class="rc-arr">&#9654;</span></div>
+    </div>
+  </div>`;
+}
+function thumbsTikTok(list){
   list.filter(v=>v.c==='tiktok').forEach(v=>{
-    const idx=virais.indexOf(v);
+    const idx=todasRefs.indexOf(v);
     fetch(`https://www.tiktok.com/oembed?url=${encodeURIComponent(v.u)}`)
       .then(r=>r.json())
       .then(d=>{
@@ -628,8 +666,18 @@ function renderRefs(f='todos'){
       }).catch(()=>{});
   });
 }
+function renderRefs(f='todos'){
+  [['rg',virais],['rgpes',pes]].forEach(([id,fonte])=>{
+    const g=document.getElementById(id);
+    if(!g)return;
+    const list=f==='todos'?fonte:fonte.filter(v=>v.c===f);
+    g.innerHTML=list.length?list.map(cardRef).join('')
+      :'<p class="refs-sub" style="grid-column:1/-1">Nenhuma refer\u00eancia dessa plataforma nesse bloco.</p>';
+    thumbsTikTok(list);
+  });
+}
 function openRefModal(i){
-  const v=virais[i];
+  const v=todasRefs[i];
   if(v.c==='tiktok'){window.open(v.u,'_blank');return;}
   document.getElementById('refModalIframe').src=v.e;
   document.getElementById('refModalCat').textContent=tlab[v.c];
