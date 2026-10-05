@@ -9,7 +9,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --p1: #5B3765; --p2: #9E6899; --p3: #BA88AE; --p4: #D6A8C4; --p5: #F3CCDE;
-  --bg: #f5eaf4; --white: #fff; --text: #2a1030; --muted: rgba(42,16,48,.48);
+  --bg: #f5eaf4; --white: #fff; --text: #2a1030; --muted: rgba(42,16,48,.72);
   --glass: rgba(255,255,255,0.42); --glass-b: rgba(255,255,255,0.75);
   --glass-s: 0 6px 32px rgba(91,55,101,.10), inset 0 1.5px 0 rgba(255,255,255,0.88);
   --glass-sh: 0 16px 50px rgba(91,55,101,.18), inset 0 1.5px 0 rgba(255,255,255,0.92);
@@ -293,6 +293,42 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
 }
 .pc-blk.alerta{background:rgba(201,120,120,.10);border:1px solid rgba(201,120,120,.30)}
 .pc-blk.alerta .pc-blk-lbl{color:#9b3b3b}
+
+/* ===== LEGIBILIDADE 50+ ===== */
+/* corpo de texto maior nos lugares que mais importam */
+.pc-desc{font-size:15px}
+.pc-blk-txt{font-size:15px; line-height:1.6}
+.pc-blk-lbl{font-size:12px}
+.pc-cat{font-size:12px}
+.rc-desc{font-size:15px; line-height:1.55}
+.oc-prod{font-size:14px}
+.oc-info{font-size:13px}
+.oc-old{font-size:15px}
+.mcard p{font-size:15px}
+.sec-lbl{font-size:14px}
+.refs-sub,.ph p,.desafios-h p,.dac-desc,.hero-sub,.pd-desc{font-size:16px}
+.vendas-copy p{font-size:16px}
+.vc-hint,.dac-ranking-lbl,.fl{font-size:13px}
+.a-gl p,.atalho p{font-size:14px}
+
+/* alvos de toque de pelo menos 44px */
+.nb{font-size:14px; padding:11px 16px}
+.fb{font-size:15px; padding:11px 18px}
+.oc-btn{font-size:14px; padding:13px 22px}
+.a-cta{font-size:14px; display:inline-block; padding:8px 0}
+.pc-link{font-size:14px; display:inline-block; padding:8px 0}
+.ci-dot{width:9px; height:9px}
+.ci-dots{gap:9px; padding:10px 0}
+.ci-nav{width:38px; height:38px}
+
+@media(max-width:600px){
+  /* menu em duas linhas: as cinco abas visiveis sem arrastar */
+  .tb-inner{flex-wrap:wrap; row-gap:8px; padding-bottom:10px}
+  .nav{overflow:visible; max-width:none; flex-wrap:wrap; width:100%;
+       margin-left:0; justify-content:flex-start; gap:6px}
+  .nav::-webkit-scrollbar{display:none}
+  .nb{font-size:14px; padding:11px 15px}
+}
 </style>
 </head>
 <body>
