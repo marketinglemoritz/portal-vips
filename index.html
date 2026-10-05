@@ -501,8 +501,18 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
     <p>Conheça cada produto Le Moritz — descrição, ativos e modo de uso para embasar seus vídeos.</p>
   </div>
 
+  <div class="filtros">
+    <span class="fl">Filtrar por</span>
+    <button class="fb on" onclick="filtProd('todos',this)">Todos</button>
+    <button class="fb" onclick="filtProd('pes',this)">Pés</button>
+    <button class="fb" onclick="filtProd('make',this)">Maquiagem</button>
+    <button class="fb" onclick="filtProd('sup',this)">Suplementação</button>
+    <button class="fb" onclick="filtProd('skin',this)">Skincare</button>
+    <button class="fb" onclick="filtProd('acess',this)">Acessórios</button>
+  </div>
+
   <!-- MAQUIAGEM -->
-  <div class="psec">
+  <div class="psec" id="ps-pes">
     <div class="psec-lbl">🦶 Pés</div>
     <div class="pgrid">
 
@@ -512,7 +522,7 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
     </div>
   </div>
 
-  <div class="psec">
+  <div class="psec" id="ps-make">
     <div class="psec-lbl">💄 Maquiagem</div>
     <div class="pgrid">
 
@@ -542,8 +552,8 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
 
   <!-- SKINCARE -->
   <!-- SUPLEMENTO -->
-  <div class="psec">
-    <div class="psec-lbl">🥤 Beleza de dentro</div>
+  <div class="psec" id="ps-sup">
+    <div class="psec-lbl">🥤 Suplementação</div>
     <div class="pgrid">
 
       <!-- COLÁGENO -->
@@ -552,7 +562,7 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
     </div>
   </div>
 
-  <div class="psec">
+  <div class="psec" id="ps-skin">
     <div class="psec-lbl">🧴 Skincare</div>
     <div class="pgrid">
 
@@ -581,7 +591,7 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
   </div>
 
   <!-- ACESSÓRIOS -->
-  <div class="psec">
+  <div class="psec" id="ps-acess">
     <div class="psec-lbl">👜 Acessórios</div>
     <div class="pgrid">
 
@@ -742,6 +752,14 @@ function ciGo(id,i){
   const w=document.getElementById(id);
   const sl=w.querySelectorAll('.slide'),dt=w.querySelectorAll('.ci-dot');
   sl.forEach((s,j)=>{s.classList.toggle('on',j===i);dt[j].classList.toggle('on',j===i);});
+}
+function filtProd(k,btn){
+  document.querySelectorAll('#tab-produtos .fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  ['pes','make','sup','skin','acess'].forEach(id=>{
+    const el=document.getElementById('ps-'+id);
+    if(el) el.style.display = (k==='todos'||k===id) ? '' : 'none';
+  });
 }
 function filt(c,btn){
   document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
