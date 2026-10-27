@@ -501,7 +501,7 @@ body{background:var(--bg);color:var(--fg);font-size:16px}
     <img class="bn-hero-img" src="Fotos/home.jpg" alt="">
     <div class="bn-hero-in">
       <h1>Black<em>November</em></h1>
-      <p>A única Black Friday para peles maduras do Brasil.</p>
+      <p>O melhor momento do ano para vender.</p>
       <div class="bn-cta">
         <button class="bn-btn" data-go="calendario">Ver calendário</button>
         <button class="bn-btn ghost" data-go="desafios">Ver o desafio</button>
@@ -765,7 +765,7 @@ function ofertasHTML(){
   '</div>';
 }
 var FASES = [
-  {s:1, e:1, t:'Abertura da Black November', d:'Começa a Black November, a única Black Friday para peles maduras do Brasil.'},
+  {s:1, e:1, t:'Abertura da Black November', d:'Começa a Black November, o melhor momento do ano para vender.'},
   {s:1, e:15, t:'Vídeos promocionais', d:'Poste os vídeos do briefing promocional entre os dias 1 e 15. Prazo final: 15/11.', btn:['briefing-promocional','Abrir briefing promocional'], gantt:{cls:'promo', lab:'Promocional', sub:'postar de 1 a 15/11'}},
   {s:1, e:20, t:'Vídeos evergreen', d:'O briefing evergreen pode ser postado entre os dias 1 e 20. Prazo final: 20/11.', btn:['briefing-evergreen','Abrir briefing evergreen'], gantt:{cls:'ever', lab:'Evergreen', sub:'postar de 1 a 20/11'}},
   {s:23, e:23, t:'Lançamento 1', d:'Primeiro lançamento da campanha.', soon:true, gantt:{cls:'lan', lab:'Lançamento 1', sub:'23/11'}},
@@ -793,7 +793,7 @@ function renderTL(){
     return '<article class="tl-item '+cls+'"><div class="tl-date">'+rng(f)+st+'</div><h3>'+f.t+'</h3><p>'+f.d+'</p>'+(f.soon?'<span class="soon">Mais detalhes em breve</span>':'')+(f.btn?'<button class="bn-btn" data-go="'+f.btn[0]+'">'+f.btn[1]+' →</button>':'')+'</article>';
   }).join('');
 }
-var BENEF = ['A única Black Friday pensada para peles maduras.','Skincare, suplemento e maquiagem feitos para as necessidades da pele 40+.','Os maiores descontos do ano começaram.','Descontos em TODAS as linhas','O melhor mês para você conhecer/recomprar os produtos','Você pode montar sua própria rotina ou escolher uma pronta para sua necessidade','Make e skincare recomendados por dermatologistas.','Brindes exclusivos, frete grátis e garantia'];
+var BENEF = ['Skincare, suplemento e maquiagem feitos para as necessidades da pele 40+.','Os maiores descontos do ano começaram.','Descontos em TODAS as linhas','O melhor mês para você conhecer/recomprar os produtos','Você pode montar sua própria rotina ou escolher uma pronta para sua necessidade','Make e skincare recomendados por dermatologistas.','Brindes exclusivos, frete grátis e garantia'];
 var BULLETS = ['Produtos com ativos pensados para as queixas da mulheres maduras','Pele madura como prioridade, não problema','Realçar. Valorizar. Celebrar a beleza da mulher madura','O envelhecimento deve ser celebrado e não combatido','Fórmulas pensadas para o jeito como a pele madura responde','Ativos que tratam enquanto realçam','Voltou: Efeito botox em 90s','Especialista em beleza madura','Beleza simplificada','Adeus linhas, rugas e bolsas','Cores e fórmulas que realçam a beleza madura','Rotina simples, resultado visível','Primeira e única marca 100% especializada em pele madura no Brasil','Mais de 250 mil mulheres 40+ já cuidam da pele com a Le Moritz','Garantia 90 dias ou todo seu dinheiro de volta','90 dias para testar sem compromisso','Pele madura com glow, sim!','Kits Exclusivos para pele madura','Ofertas exclusivas que não voltam','Skincare e Maquiagem','Best sellers com descontos exclusivos','90 dias de garantia. Risco zero','Beleza que melhora com o tempo','Beleza nos seus termos','Pele madura em primeiro lugar','Prático e Multifuncional','Frete grátis e rápido para todo o Brasil','Parcelamento em até 3x sem juros','Cuidado de dentro para fora e fora para dentro','O primeiro colágeno para a pele madura','Os maiores descontos do ano','Descontos que você nunca viu antes','Exclusivo para pele 40+/50+/60+/70+','Formulado para as necessidades da pele 40+/50+/60+/70+','Poucas unidades','Oferta disponível só esse mês','A maior oferta de todos os tempos','SOMENTE ESTE MÊS'];
 var CTA = 'Amiga, aproveita que o site da Le Moritz tá com a Black Friday para Peles Maduras. É o melhor preço do ano e, se você não gostar em 90 dias, devolvem o seu dinheiro.';
 var BRIEFINGS = {
