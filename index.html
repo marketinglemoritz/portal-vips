@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portal das VIPs · Le Moritz</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -329,6 +329,150 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
   .nav::-webkit-scrollbar{display:none}
   .nb{font-size:14px; padding:11px 15px}
 }
+/* ===== BLACK NOVEMBER ===== */
+:root{--ink:#07050C;--panel:#110C1B;--panel-2:#1A1229;--line:rgba(190,150,255,.2);--violet:#8A4DFF;--lilac:#CDB4FF;--orchid:#D6A8C4;--fg:#F3EDFB;--ok:#7BD9A4;--p1:#8A4DFF;--p2:#CDB4FF;--p3:#B79CF2;--p4:#D6A8C4;--p5:#F3CCDE;--bg:#07050C;--text:#F3EDFB;--muted:rgba(243,237,251,.78);--glass:rgba(26,18,41,.72);--glass-b:rgba(190,150,255,.2);--glass-s:0 6px 32px rgba(0,0,0,.35);--glass-sh:0 16px 50px rgba(0,0,0,.5);--dark-g:rgba(26,18,41,.8);--dark-gb:rgba(190,150,255,.2);color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-size:16px}
+.bg-canvas::before{background:radial-gradient(ellipse 700px 520px at 88% 0%,rgba(138,77,255,.28),transparent 62%),radial-gradient(ellipse 600px 500px at 0% 70%,rgba(91,55,160,.22),transparent 60%);animation:none}
+.topbar{background:rgba(7,5,12,.86);border-bottom:1px solid var(--line);box-shadow:none}
+.logo-main{color:var(--lilac)}.logo-sub{color:var(--muted)}
+.nb{color:var(--muted)}.nb:hover{background:rgba(138,77,255,.14);color:var(--fg);border-color:transparent}
+.nb.on{background:var(--violet);color:#fff;border-color:var(--violet);box-shadow:0 6px 22px rgba(138,77,255,.4)}
+.refs-heading,.ph h2{color:var(--fg)}.refs-heading em,.ph h2 em{color:var(--lilac)}
+.fb{background:var(--panel);border-color:var(--line);color:var(--fg)}.fb:hover:not(.on){background:var(--panel-2)}
+.fb.on{background:var(--violet);border-color:var(--violet);color:#fff;box-shadow:0 4px 14px rgba(138,77,255,.35)}
+.div{border-top-color:var(--line)}
+.rc,.pc{background:var(--panel);border:1px solid var(--line);box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.rc:hover,.pc:hover{border-color:rgba(205,180,255,.5);box-shadow:0 18px 44px rgba(0,0,0,.5)}
+.rc-ft,.pc-ft{border-top-color:var(--line)}
+.rc-arr{background:rgba(205,180,255,.14);color:var(--fg)}.rc:hover .rc-arr{background:var(--violet);color:#fff}
+.pc-img{background:var(--panel-2)}.pc-cat,.pc-vol{color:var(--muted)}
+.psec-lbl::after{background:var(--line)}
+.pc-blk{background:rgba(138,77,255,.12)}.pc-blk-lbl{color:var(--lilac)}
+.pc-blk.alerta{background:rgba(214,120,140,.12);border:1px solid rgba(214,120,140,.38)}.pc-blk.alerta .pc-blk-lbl{color:#ffb4c2}
+.pc-link{color:var(--lilac)}
+.up{background:rgba(138,77,255,.22);color:var(--lilac)}.ud{background:rgba(214,168,196,.16);color:var(--orchid)}.ug{background:rgba(123,217,164,.15);color:#9be8bd}
+.pc-badge{background:var(--violet)}
+.tab.on{animation:rise .35s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.tab.on{animation:none}}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lilac)}
+.h2{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(32px,5vw,46px);line-height:1.1;text-wrap:balance}
+.h2 em{color:var(--lilac);font-style:italic}
+.lead{color:var(--muted);max-width:60ch;margin-top:10px;font-size:17px;line-height:1.6}
+.page-head{margin-bottom:34px;display:grid;gap:10px}
+.sec-title{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:52px 0 16px}
+.bn-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:100px;background:var(--violet);color:#fff;font-weight:600;font-size:15px;border:0;cursor:pointer;text-decoration:none;box-shadow:0 8px 26px rgba(138,77,255,.38);transition:.15s;font-family:inherit}
+.bn-btn:hover{transform:translateY(-1px);background:#9a63ff}
+.bn-btn.ghost{background:transparent;border:1px solid rgba(205,180,255,.4);color:var(--lilac);box-shadow:none}
+.bn-btn.ghost:hover{background:rgba(138,77,255,.14)}
+.bn-hero{position:relative;overflow:hidden;border-radius:28px;border:1px solid var(--line);background:#0d0817;min-height:400px;display:flex;align-items:flex-end}
+.bn-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;opacity:.5;filter:saturate(.7) contrast(1.05)}
+.bn-hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(7,5,12,.97) 20%,rgba(40,15,95,.62) 62%,rgba(138,77,255,.28)),linear-gradient(to top,rgba(7,5,12,.85),transparent 55%)}
+.bn-hero-in{position:relative;z-index:2;padding:clamp(24px,5vw,52px);display:grid;gap:18px;max-width:760px}
+.bn-hero h1{font-family:'Playfair Display',Georgia,serif;font-weight:800;font-size:clamp(46px,11vw,104px);line-height:.92;letter-spacing:-.02em;color:#fff}
+.bn-hero h1 em{display:block;color:var(--lilac);font-weight:700}
+.bn-hero p{color:#e2d8f1;font-size:clamp(17px,2.2vw,20px);max-width:46ch}
+.bn-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
+.prize-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.prize{border-radius:18px;padding:20px;background:var(--panel);border:1px solid var(--line);display:grid;gap:4px}
+.prize.first{background:linear-gradient(160deg,#3b1c85,#1b0f3a);border-color:rgba(205,180,255,.45)}
+.prize span{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.prize.first span{color:var(--lilac)}
+.prize strong{font-family:'Playfair Display',Georgia,serif;font-size:clamp(26px,4vw,38px);font-weight:700;font-variant-numeric:tabular-nums}
+.brief-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.brief{text-align:left;cursor:pointer;border-radius:20px;padding:26px;background:var(--panel);border:1px solid var(--line);display:grid;gap:10px;align-content:start;transition:.18s;color:var(--fg);font-family:inherit}
+.brief:hover{border-color:rgba(205,180,255,.5);transform:translateY(-3px);background:var(--panel-2)}
+.brief .tag{width:fit-content;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:100px;background:rgba(138,77,255,.22);color:var(--lilac)}
+.brief.ev .tag{background:rgba(214,168,196,.16);color:var(--orchid)}
+.brief h3{font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700}
+.brief p{color:var(--muted);font-size:16px}
+.brief .go{color:var(--lilac);font-weight:600;font-size:15px;margin-top:4px}
+.offers{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.offer{border-radius:20px;padding:24px;background:var(--panel);border:1px solid var(--line);display:grid;gap:12px;align-content:start}
+.offer.wide{grid-column:1/-1}
+.onum{width:fit-content;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--lilac)}
+.offer h3{font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700}
+.offer .cont{font-size:15.5px;color:var(--muted)}
+.offer .price{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.offer .price s{color:var(--muted);font-size:16px}
+.offer .price strong{font-family:'Playfair Display',Georgia,serif;font-size:42px;font-weight:700;color:var(--lilac);line-height:1;font-variant-numeric:tabular-nums}
+.offer .off{width:fit-content;background:var(--violet);color:#fff;font-size:12.5px;font-weight:800;letter-spacing:.06em;padding:5px 12px;border-radius:100px}
+.ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.step{border-radius:14px;padding:16px 10px;text-align:center;background:var(--panel-2);border:1px solid var(--line);display:grid;gap:2px}
+.step b{font-family:'Playfair Display',Georgia,serif;font-size:32px;line-height:1;color:var(--lilac);font-variant-numeric:tabular-nums}
+.step span{font-size:14px;color:var(--muted)}
+.step:last-child{background:linear-gradient(160deg,#3b1c85,#1b0f3a);border-color:rgba(205,180,255,.45)}
+.step:last-child b{color:#fff}
+.gantt-wrap{overflow-x:auto;border-radius:20px;border:1px solid var(--line);background:var(--panel);padding:18px 18px 20px}
+.gantt{min-width:980px;display:grid;gap:6px}
+.g-row{display:grid;grid-template-columns:245px 1fr;align-items:center;gap:10px}
+.g-lab{font-size:14px;font-weight:600;color:var(--fg);line-height:1.25;white-space:nowrap}
+.g-lab small{display:block;font-weight:400;color:var(--muted);font-size:12.5px}
+.g-track{display:grid;grid-template-columns:repeat(30,1fr);position:relative;height:36px;align-items:center}
+.g-track::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(190,150,255,.07) 0 1px,transparent 1px calc(100%/30));pointer-events:none}
+.g-bar{height:28px;border-radius:8px;display:flex;align-items:center;padding:0 9px;font-size:12.5px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;position:relative}
+.g-bar.promo{background:linear-gradient(90deg,#7a3df0,#9a63ff)}.g-bar.ever{background:linear-gradient(90deg,#4d3a8a,#6f58b8)}
+.g-bar.lan{background:#d6a8c4;color:#2a0f38}.g-bar.week{background:#cdb4ff;color:#1f0c4a}.g-bar.bf{background:#fff;color:#1f0c4a}
+.g-head .g-track{height:46px}
+.g-day{text-align:center;font-size:12px;line-height:1.15;color:var(--muted);font-variant-numeric:tabular-nums}
+.g-day b{display:block;color:var(--fg);font-weight:600;font-size:12.5px}
+.g-day.we{color:var(--lilac)}.g-day.today b{background:var(--violet);border-radius:6px;color:#fff}
+.g-today{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ok);z-index:3}
+.tl{position:relative;display:grid;gap:16px;padding-left:34px;margin-top:8px}
+.tl::before{content:"";position:absolute;left:10px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--violet),rgba(138,77,255,.15))}
+.tl-item{position:relative;border-radius:18px;padding:22px 24px;background:var(--panel);border:1px solid var(--line);display:grid;gap:8px}
+.tl-item::before{content:"";position:absolute;left:-31px;top:28px;width:14px;height:14px;border-radius:50%;background:var(--ink);border:3px solid var(--violet)}
+.tl-item.done{opacity:.66}.tl-item.done::before{background:var(--ok);border-color:var(--ok)}
+.tl-item.now{border-color:rgba(205,180,255,.55);background:var(--panel-2);box-shadow:0 0 0 1px rgba(138,77,255,.3),0 14px 40px rgba(138,77,255,.18)}
+.tl-item.now::before{background:var(--violet);box-shadow:0 0 0 5px rgba(138,77,255,.28)}
+.tl-date{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lilac)}
+.tl-state{font-size:12px;padding:3px 10px;border-radius:100px;background:rgba(123,217,164,.14);color:var(--ok);letter-spacing:.06em}
+.tl-item h3{font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700}
+.tl-item p{color:var(--muted);max-width:62ch;font-size:16px}
+.tl-item .bn-btn{margin-top:6px;width:fit-content;padding:12px 22px;font-size:14.5px}
+.soon{font-size:14px;color:var(--orchid);font-weight:600}
+.podium{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:end;max-width:820px;margin:0 auto}
+.pd{border-radius:22px 22px 14px 14px;padding:22px 14px 20px;text-align:center;display:grid;gap:6px;align-content:end;border:1px solid var(--line);background:var(--panel)}
+.pd .pos{font-family:'Playfair Display',Georgia,serif;font-size:clamp(40px,8vw,72px);font-weight:800;line-height:1;color:var(--lilac)}
+.pd .lbl{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.pd .val{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:clamp(20px,4vw,34px);font-variant-numeric:tabular-nums}
+.pd.p1{min-height:270px;background:linear-gradient(170deg,#4b24a8,#1b0f3a);border-color:rgba(205,180,255,.5);box-shadow:0 24px 60px rgba(138,77,255,.25)}
+.pd.p1 .pos,.pd.p1 .lbl{color:#fff}.pd.p2{min-height:214px;background:var(--panel-2)}.pd.p3{min-height:176px}
+.rank{display:grid;gap:10px;max-width:820px}
+.rank-row{display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:12px;padding:16px 20px;border-radius:16px;background:var(--panel);border:1px solid var(--line)}
+.rank-row:first-child{background:linear-gradient(160deg,#3b1c85,#1b0f3a);border-color:rgba(205,180,255,.45)}
+.rk{font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:800;color:var(--lilac)}.rank-row:first-child .rk{color:#fff}
+.rn{color:var(--muted);font-weight:500;font-size:17px}
+.rp{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:20px;font-variant-numeric:tabular-nums}
+.back{background:none;border:0;color:var(--lilac);font-weight:600;font-size:15.5px;cursor:pointer;padding:8px 0;margin-bottom:18px;font-family:inherit}
+.b-head{display:grid;gap:14px;margin-bottom:14px}
+.deadline{width:fit-content;padding:10px 20px;border-radius:100px;font-weight:700;font-size:15.5px;background:var(--violet);color:#fff}
+.b-sec{margin-top:44px}
+.b-sec>h2{font-family:'Playfair Display',Georgia,serif;font-size:30px;font-weight:700;margin-bottom:16px}
+.quote{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:clamp(21px,3vw,28px);line-height:1.35;padding:24px 28px;border-radius:18px;background:linear-gradient(160deg,#2a1466,#130a2c);border:1px solid rgba(205,180,255,.3)}
+.vsteps{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.vstep{border-radius:16px;padding:20px;background:var(--panel);border:1px solid var(--line);display:grid;gap:6px;align-content:start}
+.vstep b{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--lilac)}
+.vstep p{font-size:16px;color:#e4dbf3}
+.lists{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.lst{border-radius:18px;padding:22px;background:var(--panel);border:1px solid var(--line);min-width:0}
+.lst h3{font-size:16.5px;font-weight:700;margin-bottom:12px;color:var(--lilac)}
+.lst ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.lst li{font-size:15.5px;color:#e4dbf3;padding-left:20px;position:relative}
+.lst li::before{content:"→";position:absolute;left:0;color:var(--violet)}
+.lst.check li::before{content:"✓";color:var(--ok)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:8px 15px;border-radius:100px;font-size:14.5px;background:rgba(138,77,255,.14);border:1px solid var(--line);color:#ece4f8}
+.ref-links{display:flex;gap:12px;flex-wrap:wrap}
+@media(max-width:760px){
+.brief-grid,.offers,.vsteps,.lists{grid-template-columns:1fr}
+.ladder{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.step{padding:12px 4px}.step b{font-size:22px}.step span{font-size:11.5px}
+.prize-row{gap:8px}.prize{padding:14px 12px}
+.bn-hero{min-height:440px}
+.tl{padding-left:28px}.tl-item::before{left:-25px}.tl-item{padding:18px}
+.podium{gap:8px}
+}
 </style>
 </head>
 <body>
@@ -342,145 +486,91 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
       <span class="logo-sub">Science &amp; Beauty</span>
     </div>
     <nav class="nav">
-      <button class="nb on"  onclick="go('home')">Home</button>
-      <button class="nb"     onclick="go('desafios')">Desafios</button>
-      <button class="nb"     onclick="go('vendas')">Vendas</button>
-      <button class="nb"     onclick="go('refs')">Referências</button>
-      <button class="nb"     onclick="go('produtos')">Produtos</button>
-    </nav>
+<button class="nb on" data-go="home">Home</button>
+<button class="nb" data-go="calendario">Calendário</button>
+<button class="nb" data-go="desafios">Desafios</button>
+<button class="nb" data-go="refs">Referências</button>
+<button class="nb" data-go="produtos">Produtos</button>
+</nav>
   </div>
 </div>
 
 <!-- ═══ HOME ═══ -->
 <div class="tab on" id="tab-home"><div class="wrap">
-  <div class="home-hero">
-    <div class="hero-split">
-      <div class="hero-photo">
-        <img src="Fotos/home.jpg" alt="Le Moritz VIPs" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,var(--p1),var(--p2))'">
-        <div class="hero-overlay">
-          <span class="hero-pill">Portal ativo · Outubro 2026</span>
-          <h1 class="hero-title">Olá,<br><em>VIPs Le Moritz</em> ✦</h1>
-          <p class="hero-sub">Referências, produtos e métricas em um só lugar.</p>
-        </div>
-      </div>
-      <div class="hero-right">
-        <div class="hcard dk gd">
-          <span class="hcard-lbl">🔒 Desafios</span>
-          <span class="hcard-val">Em breve, novidades</span>
-          <span class="hcard-sub">O próximo desafio está sendo preparado</span>
-        </div>
-        <div class="hcard lt g">
-          <span class="hcard-lbl">🎀 Outubro Rosa</span>
-          <span class="hcard-val">Kit Reposição de Colágeno</span>
-          <span class="hcard-sub">R$668 → R$347 · 48% OFF</span>
-        </div>
+  <div class="bn-hero">
+    <img class="bn-hero-img" src="Fotos/home.jpg" alt="">
+    <div class="bn-hero-in">
+      <h1>Black<em>November</em></h1>
+      <p>A única Black Friday para peles maduras do Brasil.</p>
+      <div class="bn-cta">
+        <button class="bn-btn" data-go="calendario">Ver calendário</button>
+        <button class="bn-btn ghost" data-go="desafios">Ver o desafio</button>
       </div>
     </div>
   </div>
 
-  <p class="sec-lbl">📌 Mural</p>
-  <div class="mural-grid" style="grid-template-columns:1fr">
-    <div class="mcard mc1">
-      <span class="mcard-tag">🔒 Em breve</span>
-      <h3>Em breve, novidades</h3>
-      <p>O próximo desafio das VIPs está sendo preparado. Assim que abrir, ele aparece aqui com as regras, o prazo e a premiação.</p>
-    </div>
+  <h2 class="sec-title">Ofertas de Black November</h2>
+  <div id="ofertas-home"></div>
+
+  <h2 class="sec-title">Seus briefings</h2>
+  <div class="brief-grid">
+    <button class="brief" data-go="briefing-promocional">
+      <span class="tag">Promocional · até 15/11</span>
+      <h3>Esquenta Black</h3>
+      <p>O mês inteiro com Black Friday para Peles Maduras: você não precisa esperar.</p>
+      <span class="go">Abrir briefing →</span>
+    </button>
+    <button class="brief ev" data-go="briefing-evergreen">
+      <span class="tag">Evergreen · até 20/11</span>
+      <h3>Rotina e make</h3>
+      <p>Vídeos de skincare e tutoriais de make que continuam funcionando durante todo o mês.</p>
+      <span class="go">Abrir briefing →</span>
+    </button>
   </div>
 
-  <p class="sec-lbl">🎀 Ofertas de Outubro Rosa</p>
-  <div class="ofertas-grid">
-    <div class="ocard">
-      <span class="oc-off">48% OFF</span>
-      <div class="oc-nome">Kit Reposição de Colágeno</div>
-      <div class="oc-prod">Skin Beauty Drink · Tônico Essência Hidratante 8 em 1 · Creme Antirrugas Multicamadas · Stick Rejuvenescedor Noturno</div>
-      <div class="oc-preco"><span class="oc-old">R$668</span><span class="oc-new">R$347</span></div>
-      <div class="oc-info">✓ 90 dias de garantia &nbsp;·&nbsp; ✓ 5% OFF no PIX</div>
-      <a href="https://lemoritz.com.br/products/kit-reposicao-de-colageno-le-moritz" target="_blank" class="oc-btn">Ver oferta ↗</a>
-    </div>
-    <div class="ocard">
-      <span class="oc-off">44% OFF</span>
-      <div class="oc-nome">Kit Lifting e Firmeza para Olhos</div>
-      <div class="oc-prod">Sérum Redutor Instantâneo de Linhas · Sérum Revitalizador de Olhos · Máscara de Cílios Regenerativa</div>
-      <div class="oc-preco"><span class="oc-old">R$491</span><span class="oc-new">R$277</span></div>
-      <div class="oc-info">✓ 90 dias de garantia &nbsp;·&nbsp; ✓ 5% OFF no PIX</div>
-      <a href="https://lemoritz.com.br/products/kit-lifting-e-firmeza-para-olhos" target="_blank" class="oc-btn">Ver oferta ↗</a>
-    </div>
+  <h2 class="sec-title">Desafio Black November</h2>
+  <div class="prize-row">
+    <div class="prize first"><span>1º lugar</span><strong>R$ 1.500</strong></div>
+    <div class="prize"><span>2º lugar</span><strong>R$ 1.000</strong></div>
+    <div class="prize"><span>3º lugar</span><strong>R$ 500</strong></div>
   </div>
+  <p class="lead" style="margin-top:14px">Quem vender mais leva o prêmio. <a href="#desafios" style="color:var(--lilac);font-weight:600">Ver ranking →</a></p>
+</div></div>
 
-  <p class="sec-lbl">🔗 Acesso rápido</p>
-  <div class="atalhos-grid">
-    <div class="atalho a-p1" onclick="go('desafios')">
-      <div class="a-icon">⚡</div>
-      <h3>Desafios</h3>
-      <p>Histórico completo das missões e próximos desafios.</p>
-      <span class="a-cta">Ver desafios →</span>
-    </div>
-    <div class="atalho a-gl" onclick="go('vendas')">
-      <div class="a-icon">💰</div>
-      <h3>Minhas Vendas</h3>
-      <p>Performance do cupom em tempo real — conversões e comissões.</p>
-      <span class="a-cta">Acessar dashboard →</span>
-    </div>
-    <div class="atalho a-p2" onclick="go('refs')">
-      <div class="a-icon">🎬</div>
-      <h3>Referências</h3>
-      <p>Reels em alta no Instagram para inspirar seus conteúdos.</p>
-      <span class="a-cta">Ver referências →</span>
-    </div>
-    <div class="atalho a-dk" onclick="go('produtos')">
-      <div class="a-icon">✨</div>
-      <h3>Catálogo</h3>
-      <p>Todos os produtos com ativos e modo de uso.</p>
-      <span class="a-cta">Ver produtos →</span>
-    </div>
+<!-- ═══ CALENDÁRIO ═══ -->
+<div class="tab" id="tab-calendario"><div class="wrap">
+  <div class="page-head">
+    <span class="eyebrow">Novembro 2026</span>
+    <h2 class="h2">Calendário <em>Black November</em></h2>
+    <p class="lead">Do dia 1º ao dia 27, cada fase da campanha e o prazo de cada vídeo.</p>
   </div>
+  <div class="gantt-wrap"><div class="gantt" id="gantt"></div></div>
+  <h2 class="sec-title">Linha do tempo</h2>
+  <div class="tl" id="tl"></div>
 </div></div>
 
 <!-- ═══ DESAFIOS ═══ -->
 <div class="tab" id="tab-desafios"><div class="wrap">
-  <div class="desafios-h">
-    <h2>Desafios das <em>VIPs</em></h2>
-    <p>Participe, crie conteúdo e acompanhe cada missão.</p>
+  <div class="page-head">
+    <h2 class="h2">Black November <em>desafio das VIPs</em></h2>
+    <p class="lead">Quem vender mais leva o prêmio.</p>
   </div>
-
-  <div class="desafio-ativo g">
-    <div class="dac-header">
-      <span class="dac-badge">🔒 Em breve</span>
-    </div>
-    <div class="dac-title">Em breve, novidades</div>
-    <p class="dac-desc">O próximo desafio das VIPs está sendo preparado. Assim que abrir, ele aparece aqui com tudo: o que gravar, o prazo de envio, a premiação e o link da pastinha.</p>
-    <div class="dac-ranking">
-      <p class="dac-ranking-lbl">🎬 Enquanto isso</p>
-      <div style="font-size:13px;color:var(--muted);line-height:1.8;margin-top:10px;display:flex;flex-direction:column;gap:5px;">
-        <p>• Dá uma olhada nas <a href="#" onclick="go('refs');return false;" style="color:var(--p1);font-weight:600;">referências de conteúdo ↗</a> para já ir separando ideias</p>
-        <p>• Acompanhe o seu cupom no <a href="https://dashboard-influ-lemoritz.vercel.app/" target="_blank" style="color:var(--p1);font-weight:600;">dashboard de performance ↗</a></p>
-      </div>
-    </div>
+  <div class="podium">
+    <div class="pd p2"><span class="pos">2º</span><span class="lbl">Segundo lugar</span><span class="val">R$ 1.000</span></div>
+    <div class="pd p1"><span class="pos">1º</span><span class="lbl">Primeiro lugar</span><span class="val">R$ 1.500</span></div>
+    <div class="pd p3"><span class="pos">3º</span><span class="lbl">Terceiro lugar</span><span class="val">R$ 500</span></div>
   </div>
-
-
+  <h2 class="sec-title">Ranking</h2>
+  <div class="rank">
+    <div class="rank-row"><span class="rk">1º</span><span class="rn">A definir</span><span class="rp">R$ 1.500</span></div>
+    <div class="rank-row"><span class="rk">2º</span><span class="rn">A definir</span><span class="rp">R$ 1.000</span></div>
+    <div class="rank-row"><span class="rk">3º</span><span class="rn">A definir</span><span class="rp">R$ 500</span></div>
+  </div>
+  <p class="lead" style="margin-top:12px;font-size:15px">O ranking é atualizado toda semana.</p>
 </div></div>
 
-<!-- ═══ VENDAS ═══ -->
-<div class="tab" id="tab-vendas"><div class="wrap">
-  <div class="vendas-split">
-    <div class="vendas-copy">
-      <h2>Minhas<br><em>vendas</em></h2>
-      <p>Acompanhe o desempenho do seu cupom em tempo real — conversões, cliques e resultado das suas indicações.</p>
-    </div>
-    <div class="vendas-card">
-      <div class="vc-top">
-        <span class="ico">📊</span>
-        <h3>Dashboard de Performance</h3>
-        <p>Pesquise pelo seu cupom e veja os resultados.</p>
-      </div>
-      <div class="vc-bot">
-        <a href="https://dashboard-influ-lemoritz.vercel.app/" target="_blank" class="btn">Acessar dashboard ↗</a>
-        <p class="vc-hint">Abre em nova aba · Performance de Cupom · Le Moritz</p>
-      </div>
-    </div>
-  </div>
-</div></div>
+<!-- ═══ BRIEFING ═══ -->
+<div class="tab" id="tab-briefing"><div class="wrap" id="briefing-box"></div></div>
 
 <!-- ═══ REFERÊNCIAS ═══ -->
 <div class="tab" id="tab-refs"><div class="wrap">
@@ -660,15 +750,109 @@ body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); 
 </div>
 
 <script>
-function go(id){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
-  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
-  document.getElementById('tab-'+id).classList.add('on');
-  const tabs=['home','desafios','vendas','refs','produtos'];
-  const i=tabs.indexOf(id);
-  if(i>=0) document.querySelectorAll('.nb')[i].classList.add('on');
+function go(id){ location.hash = id; }
+
+var LADDER = [['1','10%'],['2','20%'],['3','30%'],['4','40%'],['5','50%']];
+var KITS = [
+  {n:'Kit Cliente Premium', t:'Skincare', c:'Creme Antirrugas Multicamadas + Máscara de Cílios Regenerativa + Stick Blush Rosa Mauve + Sérum Redutor Instantâneo de Linhas + Sérum Revitalizador de Olhos'},
+  {n:'Kit Transformação Instantânea', t:'Maquiagem', c:'Stick Hidratante FPS 50 + Stick Blush Marrom Café + Stick Blush Rosa Mauve + Sérum Redutor Instantâneo de Linhas + Máscara de Cílios Regenerativa'}
+];
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function ofertasHTML(){
+  return '<div class="offers">'+
+  '<div class="offer wide"><span class="onum">Oferta 1</span><h3>Desconto progressivo</h3><p class="cont">Quanto mais produtos no carrinho, maior o desconto.</p><div class="ladder">'+LADDER.map(function(l){return '<div class="step"><b>'+l[1]+'</b><span>'+l[0]+(l[0]==='1'?' produto':' produtos')+'</span></div>';}).join('')+'</div></div>'+
+  KITS.map(function(k,i){return '<div class="offer"><span class="onum">Oferta '+(i+2)+'</span><h3>'+k.n+'</h3><span class="off">R$ 488 DE DESCONTO</span><p class="cont"><b style="color:var(--fg);font-weight:600">'+k.t+':</b> '+k.c+'</p><div class="price"><s>de R$ 785</s><strong>R$ 297</strong></div></div>';}).join('')+
+  '</div>';
+}
+var FASES = [
+  {s:1, e:1, t:'Abertura da Black November', d:'Começa a Black November, a única Black Friday para peles maduras do Brasil.'},
+  {s:1, e:15, t:'Vídeos promocionais', d:'Poste os vídeos do briefing promocional entre os dias 1 e 15. Prazo final: 15/11.', btn:['briefing-promocional','Abrir briefing promocional'], gantt:{cls:'promo', lab:'Promocional', sub:'postar de 1 a 15/11'}},
+  {s:1, e:20, t:'Vídeos evergreen', d:'O briefing evergreen pode ser postado entre os dias 1 e 20. Prazo final: 20/11.', btn:['briefing-evergreen','Abrir briefing evergreen'], gantt:{cls:'ever', lab:'Evergreen', sub:'postar de 1 a 20/11'}},
+  {s:23, e:23, t:'Lançamento 1', d:'Primeiro lançamento da campanha.', soon:true, gantt:{cls:'lan', lab:'Lançamento 1', sub:'23/11'}},
+  {s:23, e:27, t:'Black Week', d:'Do dia 23 ao dia 27 o foco é o lançamento e as ofertas de Black Week.', soon:true, gantt:{cls:'week', lab:'Black Week', sub:'23 a 27/11'}},
+  {s:27, e:27, t:'Black Friday e Lançamento 2', d:'Dia da Black Friday para Peles Maduras, com o segundo lançamento.', soon:true, gantt:{cls:'bf', lab:'Black Friday + Lançamento 2', sub:'27/11'}}
+];
+function pad(n){ return (n<10?'0':'')+n; }
+function rng(f){ return f.s===f.e ? pad(f.s)+'/11' : pad(f.s)+' a '+pad(f.e)+'/11'; }
+function diaCampanha(){ var d=new Date(Date.now()-3*3600*1000); var y=d.getUTCFullYear(), m=d.getUTCMonth()+1; if(y===2026&&m===11) return d.getUTCDate(); if(y<2026||(y===2026&&m<11)) return 0; return 99; }
+function renderGantt(){
+  var dc=diaCampanha(), days='', W=['D','S','T','Q','Q','S','S'];
+  for(var d=1; d<=30; d++){ var we=((d-1)%7===0)||((d-1)%7===6); days+='<div class="g-day'+(we?' we':'')+(d===dc?' today':'')+'"><b>'+d+'</b>'+W[(d-1)%7]+'</div>'; }
+  var html='<div class="g-row g-head"><div class="g-lab">Dia de novembro</div><div class="g-track" style="align-items:start">'+days+'</div></div>';
+  FASES.filter(function(f){return f.gantt;}).forEach(function(f){
+    html+='<div class="g-row"><div class="g-lab">'+f.gantt.lab+'<small>'+f.gantt.sub+'</small></div><div class="g-track"><div class="g-bar '+f.gantt.cls+'" style="grid-column:'+f.s+' / '+(f.e+1)+'">'+(f.e-f.s>=2?pad(f.s)+' → '+pad(f.e):pad(f.s))+'</div>'+(dc>=1&&dc<=30?'<div class="g-today" style="left:calc('+((dc-.5)/30*100)+'% - 1px)"></div>':'')+'</div></div>';
+  });
+  document.getElementById('gantt').innerHTML=html;
+}
+function renderTL(){
+  var dc=diaCampanha();
+  document.getElementById('tl').innerHTML=FASES.map(function(f){
+    var st='', cls='';
+    if(dc>f.e){cls='done'; st='<span class="tl-state">Concluído</span>';}
+    else if(dc>=f.s && dc<=f.e){cls='now'; st='<span class="tl-state" style="background:rgba(138,77,255,.25);color:#e2d3ff">Acontecendo agora</span>';}
+    return '<article class="tl-item '+cls+'"><div class="tl-date">'+rng(f)+st+'</div><h3>'+f.t+'</h3><p>'+f.d+'</p>'+(f.soon?'<span class="soon">Mais detalhes em breve</span>':'')+(f.btn?'<button class="bn-btn" data-go="'+f.btn[0]+'">'+f.btn[1]+' →</button>':'')+'</article>';
+  }).join('');
+}
+var BENEF = ['A única Black Friday pensada para peles maduras.','Skincare, suplemento e maquiagem feitos para as necessidades da pele 40+.','Os maiores descontos do ano começaram.','Descontos em TODAS as linhas','O melhor mês para você conhecer/recomprar os produtos','Você pode montar sua própria rotina ou escolher uma pronta para sua necessidade','Make e skincare recomendados por dermatologistas.','Brindes exclusivos, frete grátis e garantia'];
+var BULLETS = ['Produtos com ativos pensados para as queixas da mulheres maduras','Pele madura como prioridade, não problema','Realçar. Valorizar. Celebrar a beleza da mulher madura','O envelhecimento deve ser celebrado e não combatido','Fórmulas pensadas para o jeito como a pele madura responde','Ativos que tratam enquanto realçam','Voltou: Efeito botox em 90s','Especialista em beleza madura','Beleza simplificada','Adeus linhas, rugas e bolsas','Cores e fórmulas que realçam a beleza madura','Rotina simples, resultado visível','Primeira e única marca 100% especializada em pele madura no Brasil','Mais de 250 mil mulheres 40+ já cuidam da pele com a Le Moritz','Garantia 90 dias ou todo seu dinheiro de volta','90 dias para testar sem compromisso','Pele madura com glow, sim!','Kits Exclusivos para pele madura','Ofertas exclusivas que não voltam','Skincare e Maquiagem','Best sellers com descontos exclusivos','90 dias de garantia. Risco zero','Beleza que melhora com o tempo','Beleza nos seus termos','Pele madura em primeiro lugar','Prático e Multifuncional','Frete grátis e rápido para todo o Brasil','Parcelamento em até 3x sem juros','Cuidado de dentro para fora e fora para dentro','O primeiro colágeno para a pele madura','Os maiores descontos do ano','Descontos que você nunca viu antes','Exclusivo para pele 40+/50+/60+/70+','Formulado para as necessidades da pele 40+/50+/60+/70+','Poucas unidades','Oferta disponível só esse mês','A maior oferta de todos os tempos','SOMENTE ESTE MÊS'];
+var CTA = 'Amiga, aproveita que o site da Le Moritz tá com a Black Friday para Peles Maduras. É o melhor preço do ano e, se você não gostar em 90 dias, devolvem o seu dinheiro.';
+var BRIEFINGS = {
+  'briefing-promocional': {
+    tag:'Briefing promocional', titulo:'Esquenta <em>Black</em>', prazo:'Postar até 15/11',
+    narrativa:'O mês inteiro com Black Friday para Peles Maduras: você não precisa esperar!',
+    ofertasTitulo:'Ofertas Esquenta Black',
+    steps:[['1. Gancho','Gancho de oferta.'],['2. Ofertas','Passe por todas as ofertas lembrando de falar o que está incluso nos kits, ou escolha um kit para falar dele.'],['3. Demonstração','Complemente a apresentação dos itens com demonstração, cuidando para o vídeo não ficar monótono. Ex.: ao mencionar um item do kit, coloque cenas dele em vez de só falar para a câmera.'],['4. CTA','CTA como uma dica de amiga para aproveitar as ofertas. Ex.: “'+CTA+'”']],
+    listTitle:'Ideias de ganchos',
+    listas:[
+      ['Ganchos sugeridos',['A minha lista de desejos para esse Black November','Você não precisa esperar o mês todo para garantir seus produtos com preço de Black Friday','Aviso importantíssimo para as divas (ou mulheres) 40, 50, 60, 70+','Tutorial de como garantir maquiagem e skincare para pele madura com os melhores preços','Dica de uma mulher madura para outra','Rotina completa de skincare e maquiagem para pele madura aproveitando o Black November Le Moritz','Você não pode comprar nada no mês da Black Friday para Peles Maduras sem assistir isso','Não compre nada no mês da Black Friday para Peles Maduras: você não vai mais conseguir ficar sem','Eu tenho [x] anos e esses produtos que não saem da minha rotina entraram na Black Friday para Peles Maduras','O que eu, como mulher 40+, 50+, 60+, compraria na Black Friday para Peles Maduras','Anota aí a minha dica para a Black Friday para Peles Maduras!','Make exclusiva para pele madura com até 50% OFF','Amiga, você viu que o site da Le Moritz tá com até 50% de desconto?']],
+      ['Ganchos para as ofertas de Black November',['Quanto mais você leva, mais desconto: monte o meu carrinho comigo','Quais 5 produtos eu levaria para ganhar 50% OFF','Skincare completa de R$ 785 por R$ 297','Maquiagem completa de R$ 785 por R$ 297','Economizei R$ 488 em uma rotina completa para pele madura','Skincare ou maquiagem? O kit que eu levaria se só pudesse escolher um','Como eu comprei isso aqui e ainda economizei R$ 488','Unboxing do Kit para pele madura, que comprei com R$ 488 de desconto']]
+    ],
+    refs:[['Referência 1','https://drive.google.com/file/d/1TDAwGVW00CK8oewowtNhNnDDOqDI2jri/view'],['Referência 2','https://drive.google.com/file/d/1sfWSX5iFsOKjpAyq-wKRLd_KLfLoiphm/view'],['Referência 3','https://drive.google.com/file/d/19AarQqcaBuAkIDFOPFzXwuxKb_q6KGq5/view']]
+  },
+  'briefing-evergreen': {
+    tag:'Briefing evergreen', titulo:'Rotina <em>e make</em>', prazo:'Postar até 20/11',
+    narrativa:null,
+    ofertasTitulo:'Ofertas Black November',
+    steps:[['1. Gancho','Uma das frases fortes nos primeiros 2 segundos (por exemplo, “Mulher 50+, pare de fazer isso com a sua pele”), junto com uma imagem bem close, ex.: a pele de perto ou a make errada primeiro.'],['2. Desenvolvimento','Desenvolva com demonstração.'],['3. Benefícios','Em uma ou duas frases, o que resolveu na pele dela e o que ela sentiu.'],['4. CTA','CTA como dica de amiga: “'+CTA+'” Bata na tecla do melhor preço e nos 90 dias para testar.']],
+    listTitle:'Formatos e possíveis narrativas',
+    listas:[
+      ['Rotina de skincare (kits ou até 50% off no desconto progressivo)',['Mulher 50+, pare de fazer isso com a sua pele','3 erros que envelhecem a pele madura','Sua rotina não funciona por causa disso','Hoje com X anos minha pele está melhor do que aos 30 (ex.)','Pele ressecada e sem viço? Faça isso hoje','O passo que quase toda mulher 50+ pula na rotina (pode falar dos olhos aqui)','Se você tem mais de 50, assista isso antes de gastar com a sua pele','Minha pele sem filtro e o que eu faço nela','Rotina de 4 passos para a mulher 50+ que não tem tempo','Truques para dores específicas [ex.: cílios ralos, olhar cansado, pálpebra caída, bolsa de sapo, linhas e rugas]']],
+      ['Tutorial de make (kits ou até 50% off no desconto progressivo)',['Se sua make marca as linhas. Faça isso','3 erros de make que adicionam 10 anos no seu rosto (make em pó, cores erradas, jeito de aplicar)','Isso envelhece x isso rejuvenesce','“Maquiagem depois dos 50 anos não deixa a pele bonita”: NÃO, NÃO E NÃO. O que está errado é o tipo de maquiagem que às vezes acentua o que você não quer!','O segredo das atrizes 50+','Make de atriz 50+ em 5 minutos','Make para parecer que você dormiu 10 horas','Make de salão feita em casa, sem gastar muito','Make completa em 5 minutos para quem acordou atrasada','Não sabia me maquiar e aos [x] anos descobri isso','Tutorial make para pele madura','Truques/dicas de make [ex.: faça x para ter efeito y]']]
+    ],
+    refs:null
+  }
+};
+function renderBriefing(id){
+  var b=BRIEFINGS[id], v=document.getElementById('briefing-box');
+  var h='<button class="back" data-go="calendario">← Voltar ao calendário</button><div class="b-head"><span class="eyebrow">'+b.tag+'</span><h2 class="h2">'+b.titulo+'</h2><span class="deadline">'+b.prazo+'</span></div>';
+  if(b.narrativa) h+='<div class="b-sec"><h2>Narrativa</h2><div class="quote">'+b.narrativa+'</div></div>';
+  h+='<div class="b-sec"><h2>'+b.ofertasTitulo+'</h2>'+ofertasHTML()+'</div>';
+  h+='<div class="b-sec"><h2>Estrutura do vídeo</h2><div class="vsteps">'+b.steps.map(function(s){return '<div class="vstep"><b>'+s[0]+'</b><p>'+s[1]+'</p></div>';}).join('')+'</div></div>';
+  h+='<div class="b-sec"><h2>'+b.listTitle+'</h2><div class="lists">'+b.listas.map(function(l){return '<div class="lst"><h3>'+l[0]+'</h3><ul>'+l[1].map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>';}).join('')+'</div></div>';
+  h+='<div class="b-sec"><h2>Benefícios para apresentar</h2><div class="lst check"><ul>'+BENEF.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div></div>';
+  h+='<div class="b-sec"><h2>Bullet points Black 40+</h2><div class="chips">'+BULLETS.map(function(x){return '<span class="chip">'+esc(x)+'</span>';}).join('')+'</div></div>';
+  if(b.refs) h+='<div class="b-sec"><h2>Referências</h2><div class="ref-links">'+b.refs.map(function(r){return '<a class="bn-btn ghost" href="'+r[1]+'" target="_blank" rel="noopener">'+r[0]+' ↗</a>';}).join('')+'</div></div>';
+  v.innerHTML=h;
+}
+var VIEWS=['home','calendario','desafios','refs','produtos'];
+function show(){
+  var h=(location.hash||'#home').slice(1), isB=!!BRIEFINGS[h];
+  if(!isB && VIEWS.indexOf(h)<0) h='home';
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on');});
+  document.getElementById(isB?'tab-briefing':'tab-'+h).classList.add('on');
+  if(isB) renderBriefing(h);
+  var nav=isB?'calendario':h;
+  document.querySelectorAll('.nb').forEach(function(b){b.classList.toggle('on', b.getAttribute('data-go')===nav);});
   window.scrollTo(0,0);
 }
+document.addEventListener('click',function(e){
+  var g=e.target.closest('[data-go]'); if(!g) return;
+  var to=g.getAttribute('data-go');
+  if((location.hash||'#home').slice(1)===to) show(); else location.hash=to;
+});
+window.addEventListener('hashchange',show);
+document.getElementById('ofertas-home').innerHTML=ofertasHTML();
+renderGantt(); renderTL(); show();
 
 const refs=[
   {t:"O melhor conselho",d:"Esse começo de \"O melhor conselho que já recebi\" seguido de prova, mostrando os cílios antes de começar.",u:"https://www.tiktok.com/@katiefindsmoredeals/video/7656879974804098334",e:"",c:"tiktok",f:"Conselho",l:"make",th:"Fotos/refs/tt-7656879974804098334.jpg"},
